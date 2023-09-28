@@ -1,0 +1,72 @@
+.parent_table {
+    width: 160%;
+    display: flex;
+    position: relative;
+    transition: all 0.5s;
+   
+}
+.parent_class_move{
+    width: 160%;
+    display: flex;
+    position: relative;
+     right: 80%;
+     transition: all 0.5s;
+    
+}
+
+.site_submit {
+    margin: 3vh;
+    margin-right: 30px;
+    display: flex;
+    justify-content: end;
+}
+
+.site_submit button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.table_data_box {
+    padding: 30px;
+    padding-top: 20px;
+    width: 80%;
+    /* border: 5px solid green; */
+    /* height: 300px; */
+}
+
+.site_data_box {
+    padding: 30px;
+    padding-top: 20px;
+    width: 80%;
+    /* border: 5px solid yellow; */
+}
+.data_submit_btn{
+    margin-top: -100px;
+    width: 80%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    /* border: 1px solid red; */
+    padding-right: 70px;
+}
+.data_submit_btn button{
+    z-index: 2;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}

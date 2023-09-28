@@ -1,0 +1,32 @@
+.table_side_main {
+  height: 100%;
+    color: white;
+
+    background: hsla(236, 100%, 8%, 1);
+
+    background: linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+
+    background: -moz-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+
+    background: -webkit-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#000328", endColorstr="#00458E", GradientType=1);
+    
+
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+
+.add_client_box{
+  width: fit-content;
+  padding: 5px 15px ;
+  border-bottom: 5px solid   #4CAF50;
+  /* border-radius: 10px; */
+  
+
+}
+.add_client_box_hr{
+
+  border: none;
+  /* border-top: 1px dashed #4CAF50; */
+
+}

@@ -1,0 +1,34 @@
+
+.site_edit_btn{
+    background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+.site_del_btn{
+    background-color: #f44336; /* Green */
+    border: none;
+    color: white;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.site_date{
+    max-width: 100%;
+    overflow: scroll;
+    max-height:33vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-bottom: 6vh;
+}
