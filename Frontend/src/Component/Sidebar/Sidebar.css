@@ -18,11 +18,18 @@
 
 .add_client_box{
   width: fit-content;
-  padding: 5px 15px ;
+  padding: 7px 15px ;
   border-bottom: 5px solid   #4CAF50;
   /* border-radius: 10px; */
-  
-
+  display: flex;
+  cursor: pointer;
+}
+.add_client_box:hover{
+  background-color: #efefef;
+}
+.add_client_box p{
+  margin-right: 10px;
+  font-size: 1.2rem;
 }
 .add_client_box_hr{
 

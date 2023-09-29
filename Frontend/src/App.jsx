@@ -1,11 +1,21 @@
 import React from 'react'
-import Customer from './Pages/Admin/Customer.jsx'
 import './App.css'
+import Customer from './Pages/CustomerPage/Customer'
+import Home from './Pages/HomePage/Home'
+import Navbar from './Containers/Navbar/Navbar'
+import { Routes, Route } from "react-router-dom";
+import { AnimatePresence } from 'framer-motion'
+
 const App = () => {
   return (
     <div className='app_main'>
-
-      <Customer/>
+      <Navbar />
+      <AnimatePresence>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/customer' element={<Customer />} />
+      </Routes>
+      </AnimatePresence>
     </div>
   )
 }

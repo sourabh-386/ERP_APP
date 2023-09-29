@@ -1,0 +1,11 @@
+
+.table_side{
+   height: 100vh;
+   /* border: 1px solid black; */
+   z-index: 1;
+}
+.main_box {
+
+   width: 100vw;
+
+}

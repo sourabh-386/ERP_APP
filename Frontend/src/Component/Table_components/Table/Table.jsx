@@ -189,7 +189,7 @@ const Table = () => {
                         /></td>
                     </tr>
                     <tr>
-                        <td><lable>** Start Date : </lable></td>
+                        <td><label>** Start Date : </label></td>
                         <td><input
                             type="date"
                             name="Start_date"

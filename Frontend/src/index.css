@@ -7,5 +7,15 @@
   margin: 0px;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  animation: all 0.4 sec;
+  /* transition: all 0.5s ease-in-out; */
+}
+.main_div {
+
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 20vw 80vw;
+  /* border: 3px solid red; */
 }

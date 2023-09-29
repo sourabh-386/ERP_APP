@@ -15,10 +15,11 @@ const Parent_table = () => {
 
     return (
         <div>
-            <div className={pagemove ? 'parent_class_move' : 'parent_table'}>
-                <div className='table_data_box'>
-                    <Table />
-                    {/* {
+            <div className='outer_parent_div'>
+                <div className={pagemove ? 'parent_class_move' : 'parent_table_box'}>
+                    <div className='table_data_box'>
+                        <Table />
+                        {/* {
                         site_data.length == 0 ? '' : <div className='add_client_box'>
                             <b>Site Details</b>
 
@@ -29,32 +30,34 @@ const Parent_table = () => {
                         site_data.length == 0 ? '' : <Site_data />
                     } */}
 
-                    <div className='add_client_box'>
-                        <b>Site Details</b>
+                        <div className='add_client_box'>
+                            <b>Site Details</b>
+                        </div>
+                        <br />
+                        <Site_data />
+
                     </div>
-                    <br />
-                    <Site_data />
+
+                    <div className='site_data_box'>
+                        <Sitetable />
+
+                        <Site_data />
+
+
+                        <div className='site_submit'>
+                            <button type='submit' onClick={() => { setpagemove(false) }}>Save</button>
+                        </div>
+                    </div>
 
                 </div>
-
-                <div className='site_data_box'>
-                    <Sitetable />
-
-                    <Site_data />
-
-
-                    <div className='site_submit'>
-                        <button type='submit' onClick={() => { setpagemove(false) }}>Save</button>
-                    </div>
-                </div>
+             
 
             </div>
             {
-                site_data.length !== 0 && pagemove == false ? <div className='data_submit_btn'>
-                    <button onClick={() => { send_table_data() }} >Submit</button>
-                </div> : ''
-            }
-
+                    site_data.length !== 0 && pagemove == false ? <div className='data_submit_btn'>
+                        <button onClick={() => { send_table_data() }} >Submit</button>
+                    </div> : ''
+                }
         </div>
     )
 }

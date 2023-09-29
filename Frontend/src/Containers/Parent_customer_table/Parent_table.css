@@ -1,18 +1,42 @@
-.parent_table {
-    width: 160%;
+.outer_parent_div {
+    width: 80vw;
+    overflow-x: hidden;
+
+}
+
+.parent_table_box {
+    /* z-index: 5; */
+    width: 200%;
     display: flex;
     position: relative;
-    transition: all 0.5s;
-   
+    right: 0%;
+    transition: all 0.5s ease-in-out;
+
 }
-.parent_class_move{
-    width: 160%;
+
+.parent_class_move {
+
+    width: 200%;
     display: flex;
     position: relative;
-     right: 80%;
-     transition: all 0.5s;
-    
+    right: 100%;
+    transition: all 0.5s ease-in-out;
+
 }
+
+.table_data_box {
+    padding: 30px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.site_data_box {
+    padding: 30px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+
 
 .site_submit {
     margin: 3vh;
@@ -34,30 +58,19 @@
     border-radius: 10px;
 }
 
-.table_data_box {
-    padding: 30px;
-    padding-top: 20px;
-    width: 80%;
-    /* border: 5px solid green; */
-    /* height: 300px; */
-}
 
-.site_data_box {
-    padding: 30px;
-    padding-top: 20px;
-    width: 80%;
-    /* border: 5px solid yellow; */
-}
-.data_submit_btn{
-    margin-top: -100px;
+
+.data_submit_btn {
+    margin-top: -70px;
     width: 80%;
     display: flex;
     justify-content: end;
     align-items: end;
     /* border: 1px solid red; */
-    padding-right: 70px;
+    padding-right: 40px;
 }
-.data_submit_btn button{
+
+.data_submit_btn button {
     z-index: 2;
     background-color: #4CAF50;
     border: none;

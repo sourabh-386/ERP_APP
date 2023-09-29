@@ -1,0 +1,87 @@
+.navbar_main {
+
+    z-index: 3;
+    /* padding: 10px; */
+    position: fixed;
+    width: 20vw;
+    height: 100vh;
+    color: white;
+
+    background: hsla(236, 100%, 8%, 1);
+
+    background: linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+
+    background: -moz-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+
+    background: -webkit-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#000328", endColorstr="#00458E", GradientType=1);
+
+
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+
+}
+
+.main_link_box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.link{
+    /* width: 10px; */
+    padding: 8px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    margin-top: 2px;
+    color: #efefef;
+    padding-left: 20px;
+    background: rgba(0, 3, 41, 0.178);
+
+    /* background: linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%); */
+
+    /* background: -moz-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%); */
+
+    /* background: -webkit-linear-gradient(90deg, hsla(236, 100%, 8%, 1) 0%, hsla(211, 100%, 28%, 1) 100%); */
+
+    /* filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#000328", endColorstr="#00458E", GradientType=1); */
+cursor: pointer;
+}
+
+
+.link:hover {
+    background: #efefef;
+    color: black;
+    height: fit-content;
+}
+.link_inside{
+    padding-left: 40px;
+    font-size:1rem ;
+}
+
+.master_option_box{
+    position: relative;
+    overflow: hidden;
+    height: 125px;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+
+}
+.master_option_box Link{
+    padding-left: 30px;
+}
+.hide_master_option_box{
+    position: relative;
+    height: 0px;
+    transition: all 0.3s ease-in-out;
+}
+.more_link{
+    display: flex;
+    position: relative;
+}
+.nav_arrow{
+    position: absolute;
+   right: 20px;
+}
