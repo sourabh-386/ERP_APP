@@ -1,6 +1,10 @@
 .outer_parent_div {
     width: 80vw;
     overflow-x: hidden;
+    /* border: 10px solid black; */
+    padding-bottom: 55px;
+
+    
 
 }
 
@@ -82,4 +86,24 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
+}
+/* .contact_info_main{
+    padding: 0px;
+} */
+.site_data_outer_box{
+    position: relative;
+    max-height: 33vh;
+    overflow: hidden;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 5vh;
+}
+
+.site_data_outer_box_hid{
+    position: relative;
+    max-height: 0vh;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+
+
 }

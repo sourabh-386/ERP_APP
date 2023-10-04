@@ -1,3 +1,55 @@
 .customer_contact{
-   padding: 50px;
+   /* padding: 30px; */
+   /* padding-top: 10px; */
+   /* border: 1px solid black; */
+   
+}
+
+
+
+.main_customer_detail_table{
+    /* border: 1px solid black; */
+    margin-top:10px ;
+    max-width: 100%;
+    /* overflow: scroll; */
+    border-radius: 5px;
+    max-height: 30vh;
+    overflow: hidden;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    overflow-y:scroll
+
+}
+
+.main_customer_detail_table_hide{
+    /* border: 1px solid black; */
+    margin-top:10px ;
+    max-width: 100%;
+    /* overflow: scroll; */
+    border-radius: 5px;
+    max-height: 30vh;
+    overflow: hidden;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    position: relative;
+    max-height: 0px;
+    transition: all 0.3s ease-in-out;
+    overflow-y:scroll
+
+
+}
+
+.contact_inp_field{
+    width: 95%;
+    height: 3.5vh;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid rgba(69, 68, 68, 0.43);
+}
+.contact_inp_field_select{
+    min-width: 120px;
+    border: 1px solid rgba(69, 68, 68, 0.43);
+    border-radius: 3px;
+
+
 }

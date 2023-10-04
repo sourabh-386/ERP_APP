@@ -19,17 +19,32 @@
 .add_client_box{
   width: fit-content;
   padding: 7px 15px ;
-  border-bottom: 5px solid   #4CAF50;
-  /* border-radius: 10px; */
   display: flex;
   cursor: pointer;
+  width: 100%;
+  background-color: #efefef97;
+  border-radius: 3px;
+  position: relative;
 }
+.heading_underline{
+   width: 15%;
+   height: 100%;
+   top: 5px;
+   left: 0px;
+   position: absolute;
+   /* background-color: aqua; */
+   /* z-index: -1; */
+   border-bottom: 5px solid #4CAF50;
+   
+}
+
 .add_client_box:hover{
   background-color: #efefef;
 }
 .add_client_box p{
   margin-right: 10px;
   font-size: 1.2rem;
+  margin-top:-1px ;
 }
 .add_client_box_hr{
 

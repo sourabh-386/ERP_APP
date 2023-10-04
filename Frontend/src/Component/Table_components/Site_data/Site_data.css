@@ -29,6 +29,20 @@
     max-width: 100%;
     overflow: scroll;
     max-height:33vh;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    margin-bottom: 6vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;  
+}
+
+.site_data_editing_btn{
+padding: 3px 6px;
+margin: 6px;
+border-radius: 3px;
+border: 1px solid rgba(0, 0, 0, 0.13);
+opacity: 0.9;
+margin-right: 30px;
+cursor: pointer;
+margin-left: 10px;
+}
+.site_data_editing_btn:hover{
+    background-color: #71f876;
+    /* color: white; */
 }

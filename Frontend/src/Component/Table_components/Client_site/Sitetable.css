@@ -1,6 +1,8 @@
 .sitetable_main {
     padding: 20px;
     padding-top: 2vh;
+    /* border: 10px solid red; */
+   
 }
 .site_input_table tr td {
     border: none;

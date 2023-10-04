@@ -148,7 +148,7 @@ label{
     justify-content: end;
 }
 
-.Table_save_btn button {
+.Table_save_btn_btn {
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -159,6 +159,11 @@ label{
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
+    transition: all 0.3s ease-in;
+}
+.Table_save_btn_btn_color{
+    background-color: #f05d52;
+    transition: all 0.3s ease-in;    
 }
 
 .site_main_div {

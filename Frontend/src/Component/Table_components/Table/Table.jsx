@@ -15,9 +15,9 @@ import { Table_context } from '../../../Context/Table_context/Table_context'
 
 const Table = () => {
 
-    const { pagemove, setpagemove, site_data, Customer_data, set_customer_data } = useContext(Table_context)
+    const { pagemove, setpagemove,submit_btn, site_data, Customer_data, set_customer_data,set_submit_btn } = useContext(Table_context)
     const [organisation_list, setorganisation_list] = useState([''])
-
+console.log(submit_btn)
     const valid = Yup.object({
         Customer_Name: Yup.string().min(2).max(40).required(),
         Tax_Registration: Yup.string().required(),
@@ -49,16 +49,20 @@ const Table = () => {
 
             // console.log(errors)
 
-            if (site_data.length !== 0 && pagemove == false) {
+            // if (site_data.length !== 0 && pagemove == false) {
 
 
-            }
-            else {
-                setpagemove(true)
-            }
+            // }
+            // else {
+            //     setpagemove(true)
+            // }
+
+            console.log(value)
+
             set_customer_data(value)
 
 
+            set_submit_btn(true)
 
         },
 
@@ -99,7 +103,8 @@ const Table = () => {
     }
 
     //validation fn
-    const validation_fn = () => {
+    const validation_fn = (e) => {
+        e.stopPropagation()
         if (errors.Customer_Name) {
             toast.error(errors.Customer_Name)
         }
@@ -115,12 +120,20 @@ const Table = () => {
     }
 
 
+    ////////
+    const other_fn=(e)=>{
+        set_submit_btn(false)
+        handleChange(e)
+    }
+
     return (
         <div className='table_main' >
 
 
             <div className='add_client_box'>
-                <b>Customers Details</b>
+                <p class='bi bi-caret-right-fill'></p>
+                <b>Customers</b>
+                <div className='heading_underline'></div>
             </div>
             <form className='table_input' onSubmit={handleSubmit}>
 
@@ -134,7 +147,7 @@ const Table = () => {
                                 name='Customer_Name'
                                 className='client_input_fields'
                                 value={values.Customer_Name}
-                                onChange={handleChange}
+                                onChange={(e)=>{other_fn(e)}}
                                 onBlur={handleBlur}
                             />
                         </td>
@@ -147,7 +160,7 @@ const Table = () => {
                                     type="text"
                                     name='Organisation'
                                     // className='client_input_fields'
-                                    onChange={handleChange}
+                                    onChange={(e)=>{other_fn(e)}}
                                     onBlur={handleBlur}
                                     value={values.Organisation}
 
@@ -184,7 +197,7 @@ const Table = () => {
                             name="Tax_Registration"
                             value={values.Tax_Registration}
                             className='client_input_fields'
-                            onChange={handleChange}
+                            onChange={(e)=>{other_fn(e)}}
                             onBlur={handleBlur}
                         /></td>
                     </tr>
@@ -195,7 +208,7 @@ const Table = () => {
                             name="Start_date"
                             className='startdate_input'
                             value={values.Start_date}
-                            onChange={handleChange}
+                            onChange={(e)=>{other_fn(e)}}
                             onBlur={handleBlur}
                         /></td>
                         <td>
@@ -205,7 +218,7 @@ const Table = () => {
                                     name='NDA_Signed'
                                     className='nda_signed_input'
                                     value={values.NDA_Signed}
-                                    onChange={handleChange}
+                                    onChange={(e)=>{other_fn(e)}}
                                     onBlur={handleBlur}
 
 
@@ -214,23 +227,11 @@ const Table = () => {
                         <td></td>
                     </tr>
                 </table>
-                
+
                 <br />
                 <div className='Table_save_btn'>
-                    <button type='submit' onClick={() => { validation_fn() }}><b>Save</b></button>
-                    <ToastContainer
-                        autoClose={1500}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    // theme="colord"
-                    />
+                    <button className={submit_btn?'Table_save_btn_btn':'Table_save_btn_btn Table_save_btn_btn_color'} type='submit' onClick={(e) => { validation_fn(e) }}><b>Save</b></button>
                 </div>
-
             </form>
 
         </div>

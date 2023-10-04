@@ -4,13 +4,17 @@ import { Table_context } from '../../../Context/Table_context/Table_context'
 import { useContext } from 'react'
 const Site_data = () => {
 
-    const { pagemove, setpagemove, site_data, set_site_data, client_delete, editing_user } = useContext(Table_context)
+    const { pagemove, setpagemove,submit_btn, site_data, set_site_data, client_delete, editing_user } = useContext(Table_context)
 
 
 
 
     return (
         <div className='site_date'>
+            <div className='site_data_edditing_btns'>
+                <button className='site_data_editing_btn' onClick={()=>{setpagemove(true)}} ><b>Create New</b></button>
+                <button className='site_data_editing_btn' onClick={()=>{setpagemove(true)}} ><b>Edit Site</b></button>
+            </div>
             <table>
                 <tr>
                     <th>S.no</th>

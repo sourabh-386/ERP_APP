@@ -58,7 +58,6 @@ const Sitetable = () => {
             setFieldValue('Site_Name', editdata.Site_Name)
             setFieldValue('PIN_Code', editdata.PIN_Code)
             setFieldValue('Start_date', editdata.Start_date)
-
         }
     }, [editdata])
 
@@ -69,15 +68,16 @@ const Sitetable = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
+            const time=new Date().getTime()
             if (editdata !== null) {
                 // console.log(value)
                 add_edit_data({ ...value, id: editdata.id })
             }
             else {
-                set_site_data([...site_data, { ...value, id: site_data.length + 1 }])
+                set_site_data([...site_data, { ...value, id:time }])
             }
 
-            resetForm()
+            // resetForm()
 
         }
 
@@ -135,7 +135,7 @@ const Sitetable = () => {
     //function set country state and city value
     const table_toggle_country_list = (data) => {
         setFieldValue('Country', data.Country)
-        setFieldValue('State', data.State)
+        setFieldValue('State', data.State_name)
         setFieldValue('City', data.City)
         document.getElementById('country_list_toggle_id').classList.toggle('hide_country_list')
 
@@ -147,10 +147,11 @@ const Sitetable = () => {
         <div className='sitetable_main'>
 
             <div className='add_client_box'>
-                <b>Site Details</b>
-                {/* <img src={plus_img} alt="Add_Client" /> */}
+                <p class='bi bi-caret-right-fill'></p>
+                <b >Site Details</b>
+                <div className='heading_underline'></div>
             </div>
-            {/* <hr className='add_client_box_hr' /> */}
+            
 
 
             <form onSubmit={handleSubmit}>
@@ -252,7 +253,7 @@ const Sitetable = () => {
                                                     return (
                                                         <tr onClick={() => table_toggle_country_list(data)} key={index}>
                                                             <td >{data.Country}</td>
-                                                            <td >{data.State}</td>
+                                                            <td >{data.State_name}</td>
                                                             <td >{data.City}</td>
                                                         </tr>
                                                     )
