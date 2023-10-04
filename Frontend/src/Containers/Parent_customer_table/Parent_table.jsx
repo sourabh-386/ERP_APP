@@ -14,11 +14,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Parent_table = () => {
 
-    const { pagemove, setpagemove, site_data,submit_btn, send_table_data } = useContext(Table_context)
-    console.log(pagemove)
-
-    //for moving arrow
-    const[site_arrow,set_site_arrow]=useState(false)
+    const { pagemove, setpagemove, site_data,submit_btn, send_table_data,site_arrow,set_site_arrow } = useContext(Table_context)
+    // console.log(pagemove)
 
     const set_site_arrow_fn=()=>{
         if(submit_btn){

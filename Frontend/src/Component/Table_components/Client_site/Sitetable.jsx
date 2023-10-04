@@ -21,14 +21,17 @@ const Sitetable = () => {
 
     // const country_value = useRef('');
 
+//     console.log(site_data.map(item => [item.Site_Name])
+// )
+
 
     const valid = Yup.object({
-        Site_Name: Yup.string().min(2).max(40).required(),
+        Site_Name: Yup.string().min(2).max(40).required().notOneOf(site_data.map(item => item.Site_Name),'This Site Already Exist'),
         Address1: Yup.string().min(5).max(60).required(),
         Country: Yup.string().min(2).max(30).required(),
         State: Yup.string().min(2).max(30).required(),
         City: Yup.string().min(2).max(30).required(),
-        PIN_Code: Yup.number().required(),
+        PIN_Code: Yup.number().typeError('PIN Code must be a number').required('sss'),
         Start_date: Yup.date().required()
     })
 

@@ -159,10 +159,20 @@ label{
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
-    transition: all 0.3s ease-in;
+    /* transition: all 0.3s ease-in; */
+    transition: all .3s ease;
+
 }
+.Table_save_btn_btn:hover{
+    transform: translate3D(0,-1px,0) scale(1.1);
+    transition: all .3s ease;
+    cursor: pointer;
+    /* background-color: #0879c4; */
+
+}
+
 .Table_save_btn_btn_color{
-    background-color: #f05d52;
+    background-color: #ec1d0e;
     transition: all 0.3s ease-in;    
 }
 

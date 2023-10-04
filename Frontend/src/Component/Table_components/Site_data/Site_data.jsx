@@ -4,17 +4,21 @@ import { Table_context } from '../../../Context/Table_context/Table_context'
 import { useContext } from 'react'
 const Site_data = () => {
 
-    const { pagemove, setpagemove,submit_btn, site_data, set_site_data, client_delete, editing_user } = useContext(Table_context)
+    const { pagemove, setpagemove, submit_btn, site_data, set_site_data, client_delete, editing_user } = useContext(Table_context)
 
 
 
 
     return (
         <div className='site_date'>
-            <div className='site_data_edditing_btns'>
-                <button className='site_data_editing_btn' onClick={()=>{setpagemove(true)}} ><b>Create New</b></button>
-                <button className='site_data_editing_btn' onClick={()=>{setpagemove(true)}} ><b>Edit Site</b></button>
-            </div>
+            {
+                pagemove ? '' :
+
+                    <div className='site_data_edditing_btns'>
+                        <button className='site_data_editing_btn' onClick={() => { setpagemove(true) }} ><b>+ Create New</b></button>
+                        <button className='site_data_editing_btn' onClick={() => { setpagemove(true) }} ><b>Edit Site...</b></button>
+                    </div>
+            }
             <table>
                 <tr>
                     <th>S.no</th>
@@ -28,8 +32,9 @@ const Site_data = () => {
                     <th>Address4</th>
                     <th>PIN Code</th>
                     <th>Start date</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    {pagemove ? <th>Edit</th> : ''}
+                    {pagemove ? <th>Delete</th> : ''}
+
                 </tr>
                 {
                     site_data.map((data, index) => {
@@ -47,18 +52,16 @@ const Site_data = () => {
                                 <td>{data.PIN_Code}</td>
                                 <td>{data.Start_date}</td>
 
-                                <td>
+                                {/* <td>
                                     {
                                         pagemove ?
                                             <button className='site_edit_btn' onClick={() => { editing_user(data) }}>Edit</button>
                                             :
                                             <button className='site_edit_btn' onClick={() => { setpagemove(true) }}>Edit</button>
                                     }
-                                </td>
-                                <td>
-                                    <button className='site_del_btn' onClick={() => { client_delete(data.id) }}>Delete</button>
-
-                                </td>
+                                </td> */}
+                                {pagemove ? <td><button className='site_edit_btn' onClick={() => { editing_user(data) }}>Edit</button></td> : ""}
+                                {pagemove ? <td><button className='site_del_btn' onClick={() => { client_delete(data.id) }}>Delete</button></td> : ''}
 
 
                             </tr>

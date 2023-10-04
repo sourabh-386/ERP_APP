@@ -15,7 +15,7 @@ import { Table_context } from '../../../Context/Table_context/Table_context'
 
 const Table = () => {
 
-    const { pagemove, setpagemove,submit_btn, site_data, Customer_data, set_customer_data,set_submit_btn } = useContext(Table_context)
+    const { pagemove, setpagemove,submit_btn, site_data, Customer_data, set_customer_data,set_submit_btn,set_site_arrow } = useContext(Table_context)
     const [organisation_list, setorganisation_list] = useState([''])
 console.log(submit_btn)
     const valid = Yup.object({
@@ -47,20 +47,12 @@ console.log(submit_btn)
                 value.NDA_Signed = "No"
             }
 
-            // console.log(errors)
-
-            // if (site_data.length !== 0 && pagemove == false) {
-
-
-            // }
-            // else {
-            //     setpagemove(true)
-            // }
 
             console.log(value)
 
             set_customer_data(value)
 
+            set_site_arrow(true)
 
             set_submit_btn(true)
 

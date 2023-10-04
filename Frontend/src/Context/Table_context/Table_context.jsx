@@ -25,6 +25,10 @@ const Table_context_provider = ({ children }) => {
     //check submitton of submit btn
     const [submit_btn, set_submit_btn] = useState(false)
 
+    //for moving site_arrow
+    const[site_arrow,set_site_arrow]=useState(false)
+
+    
 
 
     // deleting client data function
@@ -166,7 +170,9 @@ const Table_context_provider = ({ children }) => {
         con_editdata,
         add_edit_contact_data,
         submit_btn,
-        set_submit_btn
+        set_submit_btn,
+        site_arrow,
+        set_site_arrow
 
     }
 
