@@ -2,6 +2,9 @@ import React, { useContext, useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
 import { useReducer } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Table_context = createContext(null)
 
 
@@ -26,9 +29,9 @@ const Table_context_provider = ({ children }) => {
     const [submit_btn, set_submit_btn] = useState(false)
 
     //for moving site_arrow
-    const[site_arrow,set_site_arrow]=useState(false)
+    const [site_arrow, set_site_arrow] = useState(false)
 
-    
+
 
 
     // deleting client data function
@@ -96,16 +99,11 @@ const Table_context_provider = ({ children }) => {
                     contact: contact
                 }
             });
-            if (response.data.code) {
-                alert('Customer already exist')
-            }
-            else {
-                alert('data inserted successfully')
-            }
 
-            console.log('Response from server:', response.data);
+
+            toast.success('New Customer Created succesfully')
         } catch (error) {
-            alert(error)
+            toast.error("Something went wrong")
             console.log(error)
         }
 

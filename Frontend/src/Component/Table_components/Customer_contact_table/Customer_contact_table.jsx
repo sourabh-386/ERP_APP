@@ -20,7 +20,8 @@ const Customer_contact_table = () => {
                             <td>{data.email}</td>
                             <td>{data.designation}</td>
                             <td><div className='site_edit_btn' onClick={()=>{editing_contact(data)}}>Edit</div></td>
-                            <td><div className='site_del_btn' onClick={()=>{contact_delete(data)}}>Delete</div></td>                          
+                            <td><div className='site_del_btn' onClick={()=>{contact_delete(data)}}>Delete</div></td>
+                          
                         </tr>
                     )
                 })
