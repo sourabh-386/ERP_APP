@@ -90,9 +90,9 @@ const Table_context_provider = ({ children }) => {
     const send_table_data = async () => {
 
         try {
-            const response = await axios({
+            await axios({
                 method: 'post',
-                url: 'http://localhost:3008/create',
+                url: 'http://localhost:3008/data/customer_data',
                 data: {
                     Customer_data: Customer_data,
                     site_data: site_data,
@@ -103,8 +103,13 @@ const Table_context_provider = ({ children }) => {
 
             toast.success('New Customer Created succesfully')
         } catch (error) {
-            toast.error("Something went wrong")
-            console.log(error)
+            if(error.response.data.code){
+                toast.error("Customer Already Exist")
+            }
+            else{
+                toast.error("Try Again")
+            }
+            console.log()
         }
 
 
