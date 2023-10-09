@@ -15,9 +15,9 @@ import { Table_context } from '../../../Context/Table_context/Table_context'
 
 const Table = () => {
 
-    const { pagemove, setpagemove,submit_btn, site_data, Customer_data, set_customer_data,set_submit_btn,set_site_arrow } = useContext(Table_context)
+    const { pagemove, setpagemove, submit_btn, site_data, Customer_data, set_customer_data, set_submit_btn, set_site_arrow } = useContext(Table_context)
     const [organisation_list, setorganisation_list] = useState([''])
-console.log(submit_btn)
+    // console.log(submit_btn)
     const valid = Yup.object({
         Customer_Name: Yup.string().min(2).max(40).required(),
         Tax_Registration: Yup.string().required(),
@@ -113,7 +113,7 @@ console.log(submit_btn)
 
 
     ////////
-    const other_fn=(e)=>{
+    const onchange_event_fn = (e) => {
         set_submit_btn(false)
         handleChange(e)
     }
@@ -139,7 +139,7 @@ console.log(submit_btn)
                                 name='Customer_Name'
                                 className='client_input_fields'
                                 value={values.Customer_Name}
-                                onChange={(e)=>{other_fn(e)}}
+                                onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
                             />
                         </td>
@@ -152,7 +152,7 @@ console.log(submit_btn)
                                     type="text"
                                     name='Organisation'
                                     // className='client_input_fields'
-                                    onChange={(e)=>{other_fn(e)}}
+                                    onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
                                     value={values.Organisation}
 
@@ -189,7 +189,7 @@ console.log(submit_btn)
                             name="Tax_Registration"
                             value={values.Tax_Registration}
                             className='client_input_fields'
-                            onChange={(e)=>{other_fn(e)}}
+                            onChange={(e) => { onchange_event_fn(e) }}
                             onBlur={handleBlur}
                         /></td>
                     </tr>
@@ -200,7 +200,7 @@ console.log(submit_btn)
                             name="Start_date"
                             className='startdate_input'
                             value={values.Start_date}
-                            onChange={(e)=>{other_fn(e)}}
+                            onChange={(e) => { onchange_event_fn(e) }}
                             onBlur={handleBlur}
                         /></td>
                         <td>
@@ -210,7 +210,7 @@ console.log(submit_btn)
                                     name='NDA_Signed'
                                     className='nda_signed_input'
                                     value={values.NDA_Signed}
-                                    onChange={(e)=>{other_fn(e)}}
+                                    onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
 
 
@@ -222,7 +222,7 @@ console.log(submit_btn)
 
                 <br />
                 <div className='Table_save_btn'>
-                    <button className={submit_btn?'Table_save_btn_btn':'Table_save_btn_btn Table_save_btn_btn_color'} type='submit' onClick={(e) => { validation_fn(e) }}><b>Save</b></button>
+                    <button className={submit_btn ? 'Table_save_btn_btn' : 'Table_save_btn_btn Table_save_btn_btn_color'} type='submit' onClick={(e) => { validation_fn(e) }}><b>Save</b></button>
                 </div>
             </form>
 

@@ -48,7 +48,6 @@ const Parent_table = () => {
 
                             {/* <Customer_contact_table/> */}
                         </div>
-
                     </div>
 
                     <div className='site_data_box'>

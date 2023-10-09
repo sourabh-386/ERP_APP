@@ -19,3 +19,35 @@
   grid-template-columns: 20vw 80vw;
   /* border: 3px solid red; */
 }
+
+.add_btn{
+ 
+  background-color:#008304;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.del_btn{
+
+background-color:red;
+/* Green */
+border: none;
+color: white;
+padding: 3px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 13px;
+border-radius: 5px;
+cursor: pointer;
+
+}

@@ -1,0 +1,24 @@
+.Item_table_btns {
+    /* border: 1px solid black; */
+    text-align: end;
+    width: 80vw;
+    padding: 2vh 4vh;
+}
+
+.Item_table_btns button {
+    margin-right: 20px;
+    padding: 3px 8px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.459);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.Item_table_btns button:hover {
+    transform: translate3D(0,-1px,0) scale(1.1);
+    background-color: #008304;
+    color: white;
+    transition: all 0.3s ease-in-out;
+
+}

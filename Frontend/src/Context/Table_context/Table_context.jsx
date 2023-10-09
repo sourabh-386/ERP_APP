@@ -178,10 +178,6 @@ const Table_context_provider = ({ children }) => {
         set_site_arrow
 
     }
-
-
-
-
     return (
         <Table_context.Provider value={passing}>{children}</Table_context.Provider>
     )
