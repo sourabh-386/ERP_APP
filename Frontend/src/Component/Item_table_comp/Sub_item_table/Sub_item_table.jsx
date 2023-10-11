@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useFormik } from 'formik'
 import Item_sub_segment_data from '../../../Sub_component/item_sub_segment/item_sub_segment_data'
+import { findDuplicates_sub_seg } from '../../../Helper_fn/Submit_Item_table_data'
 const Sub_item_table = () => {
 
 
@@ -23,7 +24,6 @@ const Sub_item_table = () => {
             }
             else {
                 toast.error(<div className='error_box'>Create Tech Segment</div>)
-
             }
         }
         else {
@@ -38,7 +38,7 @@ const Sub_item_table = () => {
 
     //formik use
     const initialValues = {
-        Tech_Segment: null,
+        Tech_Segment:'',
         Tech_sub_segment_Name: '',
         Rating: '',
         Start_date: '',
@@ -47,8 +47,8 @@ const Sub_item_table = () => {
     }
 
     const valid = Yup.object({
-        Tech_Segment:Yup.string().required(),
-        Tech_sub_segment_Name: Yup.string().min(2).max(40).required().notOneOf(sub_segment.map(item => item.Tech_sub_segment_Name), 'Sub Segment Already Exist'),
+        Tech_Segment: Yup.string().required(),
+        Tech_sub_segment_Name: Yup.string().min(2).max(40).required(),
         Description: Yup.string().min(2).max(150).required(),
         Rating: Yup.number().max(10).required(),
         Start_date: Yup.date().required()
@@ -63,6 +63,7 @@ const Sub_item_table = () => {
 
             set_sub_segment([...sub_segment, { ...value, id: unique_id }])
 
+            console.log(sub_segment)
             resetForm()
         },
     })
@@ -92,7 +93,8 @@ const Sub_item_table = () => {
         handleChange(e)
     }
 
-
+  //auto relode state 
+    const [, setState] = useState(false)
 
     return (
         <div className={style.main_item_table}>
@@ -113,13 +115,20 @@ const Sub_item_table = () => {
                             <td><label>** Start date</label></td>
                             <td><label>** Description</label></td>
                             <td></td>
-                            {/* <td></td> */}
+                            <td></td>
+
                         </tr>
-                        <Item_sub_segment_data />
+                        {
+                            sub_segment.map((data, index) => {
+                                return (
+                                    <Item_sub_segment_data data={data} index={index} segment={segment} setState={setState}/>
+                                )
+                            })
+                        }
 
                         <tr>
-                            <td>{sub_segment.length+1}</td>
-                            <td>
+                            <td>{sub_segment.length + 1}</td>
+                            <td className={style.dropdown}>
                                 <select
                                     className={style.input_box}
                                     name="Tech_Segment"
@@ -127,7 +136,7 @@ const Sub_item_table = () => {
                                     onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
                                 >
-                                    <option key='default' >Select</option>
+                                    <option key='default' value='' defaultValue='' >Select</option>
                                     {
                                         segment.map((data, index) => {
                                             return (
@@ -136,7 +145,6 @@ const Sub_item_table = () => {
                                         })
                                     }
                                 </select>
-
                             </td>
                             <td>
                                 <input
@@ -149,14 +157,30 @@ const Sub_item_table = () => {
                                 />
                             </td>
                             <td>
-                                <input
+                            <select
+                                name="Rating"
+                                value={values.Rating}
+                                className={style.input_box}
+                                onChange={(e) => { onchange_event_fn(e) }}
+                                onBlur={handleBlur}
+
+                            >
+                                <option value="" defaultValue='' key='default'>Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+
+                            </select>
+                                {/* <input
                                     type="number"
                                     name='Rating'
                                     className={style.input_box}
                                     value={values.Rating}
                                     onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
-                                />
+                                /> */}
                             </td>
                             <td>
                                 <input
@@ -178,7 +202,8 @@ const Sub_item_table = () => {
                                     onBlur={handleBlur}
                                 />
                             </td>
-                            <td ><button type='submit' className='add_btn' onClick={()=>{validation_fn()}}><b>+ ADD</b></button></td>
+                            <td ><button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ ADD</b></button></td>
+                            <td></td>
                         </tr>
 
                     </table>

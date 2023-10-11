@@ -74,6 +74,7 @@ const Segment_item_table = () => {
         }
     }
 
+    
     // trigerr when input change 
     const onchange_event_fn = (e) => {
 
@@ -98,9 +99,17 @@ const Segment_item_table = () => {
                             <td><label>** Start date</label></td>
                             <td><label>** Description</label></td>
                             <td></td>
+                            <td></td>
 
                         </tr>
-                        <Item_segment_data />
+                        {
+                            segment.map((data, index) => {
+                                return (
+                                    <Item_segment_data data={data} index={index} />
+                                )
+                            })
+
+                        }
                         <tr>
                             <td>{segment.length + 1}</td>
                             <td>
@@ -114,14 +123,30 @@ const Segment_item_table = () => {
                                 />
                             </td>
                             <td>
-                                <input
+                            <select
+                                name="Rating"
+                                value={values.Rating}
+                                className={style.input_box}
+                                onChange={(e) => { onchange_event_fn(e) }}
+                                onBlur={handleBlur}
+
+                            >
+                                <option value="" defaultValue='' key='default'>Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+
+                            </select>
+                                {/* <input
                                     type="number"
                                     name='Rating'
                                     className={style.input_box}
                                     value={values.Rating}
                                     onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
-                                />
+                                /> */}
                             </td>
                             <td>
                                 <input
@@ -143,7 +168,9 @@ const Segment_item_table = () => {
                                     onBlur={handleBlur}
                                 />
                             </td>
-                            <td colSpan='2'><button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ ADD</b></button></td>
+                            
+                            <td ><button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ ADD</b></button></td>
+                            <td></td>
                         </tr>
 
 

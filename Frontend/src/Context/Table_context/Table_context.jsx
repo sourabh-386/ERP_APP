@@ -103,8 +103,8 @@ const Table_context_provider = ({ children }) => {
 
             toast.success('New Customer Created succesfully')
         } catch (error) {
-            if(error.response.data.code){
-                toast.error("Customer Already Exist")
+            if(error){
+                toast.error(error)
             }
             else{
                 toast.error("Try Again")

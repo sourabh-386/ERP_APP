@@ -10,21 +10,21 @@ import { Item_Table_context } from '../../../Context/Item_table_context/Item_tab
 
 const Main_item_table = () => {
 
-  const {Item_save_btn, set_Item_save_btn,item_main_table_data, set_item_main_table_data}=useContext(Item_Table_context)
+    const { Item_save_btn, set_Item_save_btn, item_main_table_data, set_item_main_table_data } = useContext(Item_Table_context)
 
-  //change item_form_vis //setup arrow img
-  const [item_arrow,set_item_arrow]=useState(true)
+    //change item_form_vis //setup arrow img
+    const [item_arrow, set_item_arrow] = useState(true)
 
-  const arrow_set_fn=()=>{
+    const arrow_set_fn = () => {
 
-    if(Item_save_btn){
-    item_arrow?set_item_arrow(false):set_item_arrow(true)
+        if (Item_save_btn) {
+            item_arrow ? set_item_arrow(false) : set_item_arrow(true)
+        }
+        else {
+            toast.error(<div className="error_box">Save Tech Details</div>)
+
+        }
     }
-    else{
-        toast.error(<div className="error_box">Save Tech Details</div>)
-
-    }
-  }
 
     //formik yup start
 
@@ -57,7 +57,7 @@ const Main_item_table = () => {
     //validation fn show error
     const validation_fn = (e) => {
 
-        
+
         e.stopPropagation()
         if (errors.Tech_Name) {
             toast.error(<div className="error_box">{errors.Tech_Name}</div>)
@@ -81,14 +81,14 @@ const Main_item_table = () => {
 
     return (
         <div className={style.main_item_table}>
-            <div className='add_client_box' onClick={()=>{arrow_set_fn()}}>
-                <p class={item_arrow?'bi bi-caret-down-fill':'bi bi-caret-right-fill'}></p>
+            <div className='add_client_box' onClick={() => { arrow_set_fn() }}>
+                <p class={item_arrow ? 'bi bi-caret-down-fill' : 'bi bi-caret-right-fill'}></p>
                 <b>Tech Details</b>
                 <div className='heading_underline'>
 
                 </div>
             </div>
-            <form className={item_arrow?style.form:style.form_vis} onSubmit={handleSubmit}>
+            <form className={item_arrow ? style.form : style.form_vis} onSubmit={handleSubmit}>
                 <table className={style.table}>
                     <tr >
                         <td><label htmlFor="">** Tech Name :</label></td>
@@ -104,14 +104,30 @@ const Main_item_table = () => {
                         </td>
                         <td><label htmlFor="">** Rating :</label></td>
                         <td>
-                            <input
+                            <select
+                                name="Rating"
+                                value={values.Rating}
+                                className='client_input_fields'
+                                onChange={(e) => { onchange_event_fn(e) }}
+                                onBlur={handleBlur}
+
+                            >
+                                <option value="" defaultValue='' key='default'>Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+
+                            </select>
+                            {/* <input
                                 type="number"
                                 name='Rating'
                                 className='client_input_fields'
                                 value={values.Rating}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
-                            />
+                            /> */}
                         </td>
                         <td><label htmlFor="">** Start Date :</label></td>
                         <td>

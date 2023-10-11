@@ -1,14 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
-
-*{
+* {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
   /* transition: all 0.5s ease-in-out; */
 }
+
 .main_div {
 
   background-color: white;
@@ -18,11 +18,14 @@
   display: grid;
   grid-template-columns: 20vw 80vw;
   /* border: 3px solid red; */
+  /* overflow-y: scroll; */
+
+
 }
 
-.add_btn{
- 
-  background-color:#008304;
+.add_btn {
+
+  background-color: #008304;
   /* Green */
   border: none;
   color: white;
@@ -33,21 +36,66 @@
   font-size: 13px;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
+  /* width: 60px; */
+
+  transition: all 0.3s ease-in-out;
 
 }
 
-.del_btn{
+.del_btn {
 
-background-color:red;
-/* Green */
-border: none;
-color: white;
-padding: 3px 10px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 13px;
-border-radius: 5px;
-cursor: pointer;
+  background-color: red;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+
+  transition: all 0.3s ease-in-out;
+
+
+}
+
+.site_edit_btn {
+  background-color: #008CBA;
+  /* Green */
+  position: relative;
+
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+
+
+}
+
+.site_del_btn {
+  background-color: #f44336;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
 }

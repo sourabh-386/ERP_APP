@@ -20,12 +20,15 @@ const Item_Table_context_provider = ({ children }) => {
     //save sub  Segment_data
     const [sub_segment, set_sub_segment] = useState([])
 
+    //auto relode state 
+    const [demostate, setState] = useState(false)
 
     const passing = {
         Item_save_btn, set_Item_save_btn,
         item_main_table_data, set_item_main_table_data,
         segment, set_segment,
-        sub_segment, set_sub_segment
+        sub_segment, set_sub_segment,
+        demostate,setState
     }
 
     return (

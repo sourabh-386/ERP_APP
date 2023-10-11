@@ -19,7 +19,7 @@ const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, su
                     if(return_value.length === 0){
     
                         console.log('no sub repete')
-                        /////////
+                        ////////////////////////////
                     }
                     else{
                         toast.error(<div style={{ fontSize: '16px' }}>Dublicate Sub Segment </div>)
@@ -29,6 +29,7 @@ const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, su
                 }
                 else{
                     console.log('no sub_segment')
+                    /////////////////////////////
                 }
                
             }
@@ -48,7 +49,7 @@ const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, su
     }
 
 }
-export default Submit_item_details_fn
+
 
 
 
@@ -85,3 +86,6 @@ function findDuplicates_sub_seg(arr) {
     }
     return newArr;
 }
+
+
+export {Submit_item_details_fn,findDuplicates_seg,findDuplicates_sub_seg}
