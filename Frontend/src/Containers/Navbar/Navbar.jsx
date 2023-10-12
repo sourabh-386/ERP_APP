@@ -33,6 +33,7 @@ const Navbar = () => {
                 <div className={master_option_box ? 'master_option_box' : 'master_option_box hide_master_option_box'}>
                     <NavLink className='link link_inside' to="/customer"><h4>Customer</h4></NavLink>
                     <NavLink className='link link_inside' to="/Item"><h4>Item</h4></NavLink>
+                    <NavLink className='link link_inside' to="/employee"><h4>Employee</h4></NavLink>
                     <div className='link link_inside'><h4>Nav3</h4></div>
                 </div>
 

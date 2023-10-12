@@ -10,7 +10,7 @@ import { Item_Table_context } from '../../../Context/Item_table_context/Item_tab
 
 const Main_item_table = () => {
 
-    const { Item_save_btn, set_Item_save_btn, item_main_table_data, set_item_main_table_data } = useContext(Item_Table_context)
+    const { Item_save_btn, set_Item_save_btn, item_main_table_data, set_item_main_table_data,Set_segment_vis } = useContext(Item_Table_context)
 
     //change item_form_vis //setup arrow img
     const [item_arrow, set_item_arrow] = useState(true)
@@ -50,7 +50,7 @@ const Main_item_table = () => {
 
             set_item_main_table_data(value)
             set_Item_save_btn(true)
-            console.log(value)
+            // Set_segment_vis(true)
         },
     })
 

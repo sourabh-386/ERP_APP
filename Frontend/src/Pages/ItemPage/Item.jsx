@@ -20,8 +20,7 @@ const Item = () => {
                 </div>
                 <div className='main_box'>
                     <Item_parent/>
-                </div>
-               
+                </div>       
             </div>
             </Item_Table_context_provider>
         </motion.div>

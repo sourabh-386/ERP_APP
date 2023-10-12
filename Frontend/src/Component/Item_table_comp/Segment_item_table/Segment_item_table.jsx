@@ -7,13 +7,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup'
-
-import Item_segment_data from '../../../Sub_component/Item_segment/Item_segment_data';
 import { useEffect } from 'react';
+import Item_segment_data from '../../../Sub_component/Item_segment/Item_segment_data';
+// import { useEffect } from 'react';
 const Segment_item_table = () => {
 
     //setup arrow img
-    const { Item_save_btn, segment, set_segment } = useContext(Item_Table_context)
+    const { Item_save_btn, segment, set_segment, segment_vis, Set_segment_vis } = useContext(Item_Table_context)
     const [segment_arrow, set_segment_arrow] = useState(false)
 
 
@@ -74,12 +74,19 @@ const Segment_item_table = () => {
         }
     }
 
-    
+
     // trigerr when input change 
     const onchange_event_fn = (e) => {
 
         handleChange(e)
     }
+
+    ///open segment first  time
+    useEffect(() => {
+
+        Item_save_btn? set_segment_arrow(true) : set_segment_arrow(false)
+    }, [Item_save_btn])
+
 
     return (
         <div className={style.main_item_table}>
@@ -123,22 +130,22 @@ const Segment_item_table = () => {
                                 />
                             </td>
                             <td>
-                            <select
-                                name="Rating"
-                                value={values.Rating}
-                                className={style.input_box}
-                                onChange={(e) => { onchange_event_fn(e) }}
-                                onBlur={handleBlur}
+                                <select
+                                    name="Rating"
+                                    value={values.Rating}
+                                    className={style.input_box}
+                                    onChange={(e) => { onchange_event_fn(e) }}
+                                    onBlur={handleBlur}
 
-                            >
-                                <option value="" defaultValue='' key='default'>Select</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                >
+                                    <option value="" defaultValue='' key='default'>Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
 
-                            </select>
+                                </select>
                                 {/* <input
                                     type="number"
                                     name='Rating'
@@ -168,13 +175,10 @@ const Segment_item_table = () => {
                                     onBlur={handleBlur}
                                 />
                             </td>
-                            
-                            <td ><button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ ADD</b></button></td>
+
+                            <td ><button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ADD</b></button></td>
                             <td></td>
                         </tr>
-
-
-
                     </table>
                 </div>
             </form>

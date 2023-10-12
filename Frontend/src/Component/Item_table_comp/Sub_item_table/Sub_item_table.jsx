@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { useState } from 'react'
 import moment from 'moment'
 import * as Yup from 'yup'
-
+import { useEffect } from 'react'
 import { Item_Table_context } from '../../../Context/Item_table_context/Item_table_context'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -38,7 +38,7 @@ const Sub_item_table = () => {
 
     //formik use
     const initialValues = {
-        Tech_Segment:'',
+        Tech_Segment: '',
         Tech_sub_segment_Name: '',
         Rating: '',
         Start_date: '',
@@ -93,8 +93,10 @@ const Sub_item_table = () => {
         handleChange(e)
     }
 
-  //auto relode state 
+    //auto relode state 
     const [, setState] = useState(false)
+
+  
 
     return (
         <div className={style.main_item_table}>
@@ -121,7 +123,7 @@ const Sub_item_table = () => {
                         {
                             sub_segment.map((data, index) => {
                                 return (
-                                    <Item_sub_segment_data data={data} index={index} segment={segment} setState={setState}/>
+                                    <Item_sub_segment_data data={data} index={index} segment={segment} setState={setState} />
                                 )
                             })
                         }
@@ -157,22 +159,22 @@ const Sub_item_table = () => {
                                 />
                             </td>
                             <td>
-                            <select
-                                name="Rating"
-                                value={values.Rating}
-                                className={style.input_box}
-                                onChange={(e) => { onchange_event_fn(e) }}
-                                onBlur={handleBlur}
+                                <select
+                                    name="Rating"
+                                    value={values.Rating}
+                                    className={style.input_box}
+                                    onChange={(e) => { onchange_event_fn(e) }}
+                                    onBlur={handleBlur}
 
-                            >
-                                <option value="" defaultValue='' key='default'>Select</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                >
+                                    <option value="" defaultValue='' key='default'>Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
 
-                            </select>
+                                </select>
                                 {/* <input
                                     type="number"
                                     name='Rating'
@@ -202,7 +204,7 @@ const Sub_item_table = () => {
                                     onBlur={handleBlur}
                                 />
                             </td>
-                            <td ><button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ ADD</b></button></td>
+                            <td ><button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ADD</b></button></td>
                             <td></td>
                         </tr>
 

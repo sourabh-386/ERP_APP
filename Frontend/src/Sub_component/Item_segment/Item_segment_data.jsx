@@ -89,13 +89,6 @@ const Item_segment_data = ({ data, index }) => {
                     <option value="5">5</option>
 
                 </select>
-                {/* <input type="text"
-                    value={data.Rating}
-                    name='Rating'
-                    onChange={(e) => { onchange_data_fn(data, e) }}
-                    className={style.input_box}
-                    disabled={disabled}
-                /> */}
             </td>
             <td>
                 <input type="date"
