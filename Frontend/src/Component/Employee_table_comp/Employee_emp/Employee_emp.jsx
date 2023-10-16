@@ -10,6 +10,7 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import Employee_emp_data from '../../../Sub_component/Employee_emp/Employee_emp_data';
 import { useEffect } from 'react';
+import Date_fn from '../../../Helper_fn/Date_fn';
 const Employee_emp = () => {
 
     //setup arrow img
@@ -43,7 +44,7 @@ const Employee_emp = () => {
         Gender: '',
         Grade: '',
         Active: '',
-        Start_date: new Date(),
+        Start_date: Date_fn(),
         id: ''
     }
     const valid = Yup.object({

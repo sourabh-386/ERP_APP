@@ -109,7 +109,7 @@ const Table_context_provider = ({ children }) => {
             else{
                 toast.error("Try Again")
             }
-            console.log()
+            console.log(error)
         }
 
 

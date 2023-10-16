@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Table_context } from '../../../Context/Table_context/Table_context'
 // import Sitetable from '../../Sub_component/Client_site/Sitetable'
-
+import Date_fn from '../../../Helper_fn/Date_fn'
 
 const Table = () => {
 
@@ -29,7 +29,7 @@ const Table = () => {
     const initialValues = {
         Customer_Name: '',
         Tax_Registration: '',
-        Start_date: '',
+        Start_date: Date_fn(),
         Organisation: '',
         NDA_Signed: false
     }

@@ -22,6 +22,7 @@ const Emp_Table_context_provider = ({ children }) => {
 
     // auto open aemp details one time
     const [emp,set_emp]=useState(false)
+    
     const passing = {
         Emp_save_btn, set_Emp_save_btn,
         emp_hr_table_data, set_emp_hr_table_data,

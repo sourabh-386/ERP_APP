@@ -1,9 +1,5 @@
 const path = require('path')
 const mysql = require('mysql2/promise')
-// const db=require('../../Server')
-
-
-
 const { send_mail_fn } = require('./Helper_functions/Customre_mail_send_fn.js')
 
 exports.Customer_table_fn = async (req, res) => {
@@ -19,8 +15,8 @@ exports.Customer_table_fn = async (req, res) => {
     let transactionSuccess = false;
     let conn;
     conn = await db.getConnection();
+    
     try {
-
        
         await conn.beginTransaction();
 

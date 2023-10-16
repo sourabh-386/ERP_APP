@@ -7,7 +7,7 @@ import { useFormik } from 'formik'
 import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from 'react';
 import { Item_Table_context } from '../../../Context/Item_table_context/Item_table_context';
-
+import Date_fn from '../../../Helper_fn/Date_fn';
 const Main_item_table = () => {
 
     const { Item_save_btn, set_Item_save_btn, item_main_table_data, set_item_main_table_data,Set_segment_vis } = useContext(Item_Table_context)
@@ -31,7 +31,7 @@ const Main_item_table = () => {
     const initialValues = {
         Tech_Name: '',
         Rating: '',
-        Start_date: '',
+        Start_date: Date_fn(),
         Description: ''
     }
     const valid = Yup.object({

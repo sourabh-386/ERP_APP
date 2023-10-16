@@ -9,7 +9,7 @@ import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react'
-
+import Date_fn from '../../../Helper_fn/Date_fn'
 
 const Sitetable = () => {
 
@@ -45,7 +45,7 @@ const Sitetable = () => {
         State: '',
         City: '',
         PIN_Code: '',
-        Start_date: '',
+        Start_date: Date_fn(),
         id: ''
     }
 

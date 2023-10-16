@@ -1,7 +1,7 @@
 const path = require('path')
 const mysql = require('mysql2/promise')
 
-exports.Tech_table_fn = async (req, res) => {
+exports.Emp_table_fn = async (req, res) => {
 
     const db = mysql.createPool({
         host: "localhost",

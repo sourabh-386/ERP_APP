@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useFormik } from 'formik'
 import Item_sub_segment_data from '../../../Sub_component/item_sub_segment/item_sub_segment_data'
 import { findDuplicates_sub_seg } from '../../../Helper_fn/Submit_Item_table_data'
+import Date_fn from '../../../Helper_fn/Date_fn'
 const Sub_item_table = () => {
 
 
@@ -41,7 +42,7 @@ const Sub_item_table = () => {
         Tech_Segment: '',
         Tech_sub_segment_Name: '',
         Rating: '',
-        Start_date: '',
+        Start_date: Date_fn(),
         Description: '',
         id: '',
     }

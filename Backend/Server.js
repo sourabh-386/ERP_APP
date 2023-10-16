@@ -20,8 +20,7 @@ app.get('/', (req, res) => {
 })
 
 
-
-
+//for geo location
 app.get('/location', (req, res) => {
   const sql = "SELECT * FROM geo_lookup"
   db.query(sql, (err, data) => {

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { Emp_Table_context } from '../../../Context/Employee_table_context/Employee_table_context'
 import { useContext } from 'react'
+import Date_fn from '../../../Helper_fn/Date_fn'
 const Employee_hr = () => {
 
     const { Emp_save_btn, set_Emp_save_btn, emp_hr_table_data, set_emp_hr_table_data, emp, set_emp } = useContext(Emp_Table_context)
@@ -24,6 +25,8 @@ const Employee_hr = () => {
         }
     }
 
+
+
     //formik
     const initialValues = {
         EMP_First_Name: '',
@@ -32,15 +35,17 @@ const Employee_hr = () => {
         Title: '',
         Gender: '',
         Grade: '',
+        Start_date: Date_fn(),
         Active: ''
     }
     const valid = Yup.object({
-        EMP_First_Name: Yup.string().min(2).max(40).required(),
-        EMP_Last_Name: Yup.string().min(2).max(40).required(),
-        EMP_Middle_Name: Yup.string().min(2).max(40),
-        Title: Yup.string().min(2).max(40).required(),
-        Gender: Yup.string().min(2).max(40).required(),
-        Grade: Yup.string().min(2).max(40).required(),
+        EMP_First_Name: Yup.string().notOneOf([" ", "  ", "   ", "    ", "     ", "      "], "First Name must not consist of spaces only").min(2).max(40).required('First name is required field'),
+        EMP_Last_Name: Yup.string().notOneOf([" ", "  ", "   ", "    ", "     ", "      "], "Last Name must not consist of spaces only").min(2).max(40),
+        EMP_Middle_Name: Yup.string().notOneOf([" ", "  ", "   ", "    ", "     ", "      "], "Middle Name must not consist of spaces only").min(2).max(40),
+        Title: Yup.string().notOneOf([" ", "  ", "   ", "    ", "     ", "      "], "Title must not consist of spaces only").min(2).max(40).required('Title is required field'),
+        Gender: Yup.string().min(2).max(40).required('Gender is required field'),
+        Grade: Yup.string().notOneOf([" ", "  ", "   ", "    ", "     ", "      "], "Grade must not consist of spaces only").min(2).max(40).required('Grade is required field'),
+        Start_date: Yup.date().required(),
         Active: Yup.string().required()
 
     })
@@ -79,6 +84,9 @@ const Employee_hr = () => {
         else if (errors.Grade) {
             toast.error(<div className="error_box">{errors.Grade}</div>)
         }
+        else if (errors.Start_date) {
+            toast.error(<div className="error_box">{errors.Start_date}</div>)
+        }
         else if (errors.Active) {
             toast.error(<div className="error_box">{errors.Active}</div>)
         }
@@ -105,7 +113,7 @@ const Employee_hr = () => {
             <form className={item_arrow ? style.form : style.form_vis} onSubmit={handleSubmit}>
                 <table className={style.table}>
                     <tr >
-                        <td><label htmlFor="">** EMP First Name :</label></td>
+                        <td><label htmlFor="">** First Name :</label></td>
                         <td>
                             <input
                                 type="text"
@@ -119,7 +127,7 @@ const Employee_hr = () => {
                             />
                         </td>
 
-                        <td><label htmlFor="">EMP Middle Name :</label></td>
+                        <td><label htmlFor="">Middle Name :</label></td>
                         <td>
                             <input
                                 type="text"
@@ -131,7 +139,7 @@ const Employee_hr = () => {
                             />
                         </td>
 
-                        <td><label htmlFor="">** EMP Last Name :</label></td>
+                        <td><label htmlFor="">Last Name :</label></td>
                         <td>
                             <input
                                 type="text"
@@ -159,14 +167,18 @@ const Employee_hr = () => {
 
                         <td><label htmlFor="">** Gender :</label></td>
                         <td>
-                            <input
-                                type="text"
-                                name='Gender'
+                            <select
                                 className='client_input_fields'
                                 value={values.Gender}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
-                            />
+                                name="Gender" >
+                                    <option value="" defaultValue='' key='default'>Select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+
+                            </select>
+                            
                         </td>
 
                         <td><label htmlFor="">** Grade :</label></td>
@@ -183,6 +195,16 @@ const Employee_hr = () => {
 
                     </tr>
                     <tr>
+                        <td><label>** Start Date : </label></td>
+                        <td><input
+                            type="date"
+                            name="Start_date"
+                            className='client_input_fields'
+                            // value={date.toLocaleDateString('en-CA')}
+                            value={values.Start_date}
+                            onChange={(e) => { onchange_event_fn(e) }}
+                            onBlur={handleBlur}
+                        /></td>
                         <td><label htmlFor="">** Active :</label></td>
                         <td>
                             <select
@@ -214,8 +236,6 @@ const Employee_hr = () => {
                                 pauseOnHover
                             // theme="colord"
                             />
-                            {/* <button onClick={(e) => { validation_fn(e) }} type='submit' className={Item_save_btn ? style.btn : `${style.btn} ${style.btn_color}`}><b>Save</b></button>
-                     */}
 
                         </td>
                     </tr>

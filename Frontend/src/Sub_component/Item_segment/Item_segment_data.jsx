@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Item_segment_data = ({ data, index }) => {
 
-    const { segment, set_segment, setState, demostate } = useContext(Item_Table_context)
+    const { segment, Item_save_btn,set_segment, setState, demostate } = useContext(Item_Table_context)
 
 
     //disable enable  input value change

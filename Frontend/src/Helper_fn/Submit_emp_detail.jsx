@@ -1,20 +1,22 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from 'axios';
 //Submit data to backend
-const Submit_emp_details_fn = (Emp_save_btn, emp_table,emp_hr_table_data) => {
+const Submit_emp_details_fn = (Emp_save_btn, emp_table, emp_hr_table_data) => {
 
     if (Emp_save_btn) {
 
-        if (emp_hr_table_data.length !== 0) {
+        if (emp_table.length !== 0) {
 
             //////////////////////////////
-            console.log(Emp_save_btn, emp_table,emp_hr_table_data)
+            // console.log(Emp_save_btn, emp_table, emp_hr_table_data)
             ///////////////////////////////
+            send_emp_data(emp_hr_table_data, emp_table)
+
         } else {
 
-        toast.error(<div className='error_box'>Enter Employee Assign Details</div>)
-            
+            toast.error(<div className='error_box'>Enter Employee Assign Details</div>)
+
         }
 
     }
@@ -23,6 +25,39 @@ const Submit_emp_details_fn = (Emp_save_btn, emp_table,emp_hr_table_data) => {
     }
 
 }
+
+//send data to backend
+const send_emp_data = async (emp_hr_table_data, emp_table) => {
+
+    try {
+        await axios({
+            method: 'post',
+            url: 'http://localhost:3008/data/emp_dat',
+            data: {
+                Hr_table: emp_hr_table_data,
+                Emp_table: emp_table
+            }
+        });
+
+
+        toast.success(<div className='error_box'>Employees Data Saved succesfully</div>)
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+// function to convert first letter to uppercase
+
+// const Modifying_values = (value) => {
+//     const trim_value = value.trim();
+//     const cap_value = trim_value[0].toUpperCase() + trim_value.slice(1);
+//     return (cap_value)
+// }
+
+
+
 
 
 
@@ -62,4 +97,4 @@ const Submit_emp_details_fn = (Emp_save_btn, emp_table,emp_hr_table_data) => {
 // }
 
 
-export { Submit_emp_details_fn}
+export { Submit_emp_details_fn }

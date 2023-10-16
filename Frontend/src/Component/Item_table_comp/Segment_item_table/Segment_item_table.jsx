@@ -10,6 +10,7 @@ import * as Yup from 'yup'
 import { useEffect } from 'react';
 import Item_segment_data from '../../../Sub_component/Item_segment/Item_segment_data';
 // import { useEffect } from 'react';
+import Date_fn from '../../../Helper_fn/Date_fn';
 const Segment_item_table = () => {
 
     //setup arrow img
@@ -33,7 +34,7 @@ const Segment_item_table = () => {
     const initialValues = {
         Tech_segment_Name: '',
         Rating: '',
-        Start_date: '',
+        Start_date: Date_fn(),
         Description: '',
         id: ''
     }
