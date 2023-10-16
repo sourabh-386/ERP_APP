@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from 'axios';
 //Submit data to backend
 const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, sub_segment) => {
 
@@ -11,29 +11,32 @@ const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, su
             const return_value = findDuplicates_seg(segment)
 
             if (return_value.length === 0) {
-               
-                if (sub_segment.length !== 0){
+
+                if (sub_segment.length !== 0) {
 
                     const return_value = findDuplicates_sub_seg(sub_segment)
 
-                    if(return_value.length === 0){
+                    if (return_value.length === 0) {
 
                         /////////////////////////////
-                        send_item_data()    
+                        send_item_data(item_main_table_data, segment, sub_segment)
                         ////////////////////////////
+                        // console.log(item_main_table_data,segment,sub_segment)
 
                     }
-                    else{
+                    else {
                         toast.error(<div className='error_box'>Dublicate Sub Segment </div>)
-    
+
                     }
 
                 }
-                else{
-                    console.log('no sub_segment')
+                else {
+                    // console.log('no sub_segment')
+                    send_item_data(item_main_table_data, segment, sub_segment)
+
                     /////////////////////////////
                 }
-               
+
             }
             else {
                 toast.error(<div style={{ fontSize: '16px' }}>Dublicate Tech Segment </div>)
@@ -58,7 +61,7 @@ const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, su
 //function for finding dublicate in segment data
 
 function findDuplicates_seg(arr) {
-    console.log(arr)
+    // console.log(arr)
     let index = 0, newArr = [];
     for (let i = 0; i < arr.length - 1; i++) {
         for (let j = i + 1; j < arr.length; j++) {
@@ -74,7 +77,7 @@ function findDuplicates_seg(arr) {
 
 //function for finding dublicate in sub segment data
 
-function findDuplicates_sub_seg(arr){
+function findDuplicates_sub_seg(arr) {
     console.log(arr)
     let index = 0, newArr = [];
     for (let i = 0; i < arr.length - 1; i++) {
@@ -96,28 +99,37 @@ function findDuplicates_sub_seg(arr){
 
 //sending data fn
 
-const send_item_data = async (emp_hr_table_data, emp_table) => {
+const send_item_data = async (item_main_table_data, segment, sub_segment) => {
 
     try {
-        await axios({
+        const res = await axios({
             method: 'post',
-            url: 'http://localhost:3008/data/emp_dat',
+            url: 'http://localhost:3008/data/Item_data',
             data: {
-                Hr_table: emp_hr_table_data,
-                Emp_table: emp_table
+                item_main_table_data: item_main_table_data,
+                segment: segment,
+                sub_segment: sub_segment
             }
         });
 
-
-        toast.success(<div className='error_box'>Employees Data Saved succesfully</div>)
+        toast.success(<div className='error_box'>{res.data}</div>)
+        
     } catch (error) {
-        console.log(error)
+
+        console.log('catch',error)
+
+        if(error.request.status==404){
+            toast.error(<div className='error_box'>Network Error Try Again</div>)
+
+        }
+        else{
+            toast.error(<div className='error_box'>Item Alredy Exist</div>)
+        }
+
     }
 
 }
 
 
 
-
-
-export {Submit_item_details_fn,findDuplicates_seg,findDuplicates_sub_seg}
+export { Submit_item_details_fn, findDuplicates_seg, findDuplicates_sub_seg }

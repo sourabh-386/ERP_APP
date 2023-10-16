@@ -45,6 +45,7 @@ const Sub_item_table = () => {
         Start_date: Date_fn(),
         Description: '',
         id: '',
+        segment_id:''
     }
 
     const valid = Yup.object({
@@ -62,7 +63,14 @@ const Sub_item_table = () => {
 
             let unique_id = new Date().getTime()
 
-            set_sub_segment([...sub_segment, { ...value, id: unique_id }])
+            const sample= segment.filter((data) => {
+                return (data.Tech_segment_Name === value.Tech_Segment)
+            })
+
+           const seg_id= sample[0].id
+        //    console.log(cust_site_id)
+
+            set_sub_segment([...sub_segment, { ...value, id: unique_id,segment_id:seg_id }])
 
             console.log(sub_segment)
             resetForm()

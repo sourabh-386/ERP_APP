@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Item_segment_data = ({ data, index }) => {
 
-    const { segment, Item_save_btn,set_segment, setState, demostate } = useContext(Item_Table_context)
+    const { segment, Item_save_btn, set_segment, setState, sub_segment, demostate, set_sub_segment } = useContext(Item_Table_context)
 
 
     //disable enable  input value change
@@ -29,9 +29,19 @@ const Item_segment_data = ({ data, index }) => {
 
     //delete segment fn
     const delete_segment = (data) => {
+
+        const filterd_data = segment.filter((value) => {
+            return (value.id == data.id)
+        })
+
         set_segment(
             segment.filter((value) => {
                 return (value.id != data.id)
+            })
+        )
+        set_sub_segment(
+            sub_segment.filter((value) => {
+                return (value.segment_id != filterd_data[0].id)
             })
         )
     }
@@ -43,6 +53,17 @@ const Item_segment_data = ({ data, index }) => {
         if (disabled) {
             set_disabled(!disabled)
         } else {
+
+            const filterd_data = segment.filter((value) => {
+                return (value.id == data.id)
+            })
+            set_sub_segment(
+                sub_segment.filter((value) => {
+                    return (value.segment_id != filterd_data[0].id)
+                })
+            )
+
+
             const dublicate_segment = findDuplicates_seg(segment)
             if (dublicate_segment.length == 0) {
                 set_disabled(!disabled)
@@ -79,7 +100,7 @@ const Item_segment_data = ({ data, index }) => {
                     value={data.Rating}
                     className={style.input_box}
                     onChange={(e) => { onchange_data_fn(data, e) }}
-                   
+
                     disabled={disabled}
                 >
                     <option value="1">1</option>

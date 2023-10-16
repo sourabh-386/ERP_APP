@@ -7,7 +7,7 @@ exports.Tech_table_fn = async (req, res) => {
         host: "localhost",
         user: "root",
         password: "",
-        database: "employees"
+        database: "item_table"
     })
 
     const currentTimestamp = new Date().getTime();
@@ -21,66 +21,92 @@ exports.Tech_table_fn = async (req, res) => {
 
         // extrating data 
 
-        const { Hr_table, Emp_table } = req.body
+        const { item_main_table_data, segment, sub_segment } = req.body
 
-        const { EMP_First_Name, EMP_Last_Name, EMP_Middle_Name, Title, Gender, Grade, Start_date, Active } = Hr_table;
+        const { Tech_Name, Rating, Start_date, Description } = item_main_table_data;
 
-        const formattedFirstName = EMP_First_Name.trim().charAt(0).toUpperCase() + EMP_First_Name.trim().slice(1).toLowerCase();
-        const formattedLastName = EMP_Last_Name.trim().toLowerCase();
-        const formattedMiddleName = EMP_Middle_Name.trim().toLowerCase();
-        const formattedTitle = Title.trim().charAt(0).toUpperCase() + Title.trim().slice(1).toLowerCase();
-        const formattedGender = Gender
-        const formattedGrade = Grade.trim().charAt(0).toUpperCase() + Grade.trim().slice(1).toLowerCase();
+        const formattedTech_Name = Tech_Name.trim().charAt(0).toUpperCase() + Tech_Name.trim().slice(1).toLowerCase();
 
-        const full_name = formattedFirstName + (formattedMiddleName ? ` ${formattedMiddleName}` : '') + (formattedLastName ? ` ${formattedLastName}` : '')
+        const sql1 = `INSERT INTO tech_item 
+        (Tech_Name, Tech_Rating, Start_date, Tech_Description,Tech_id) 
+        VALUES (?,?,?,?,?)`;
 
-        const sql1 = `INSERT INTO HR_MASTER 
-        (EMP_First_Name, EMP_Last_Name, EMP_Middle_Name, Title, Gender, Grade,Start_date,Active,EMP_id,Full_name) 
-        VALUES (?,?,?,?,?,?,?,?,?,?)`;
-
-        const values = [formattedFirstName, formattedLastName, formattedMiddleName, formattedTitle, formattedGender, formattedGrade, Start_date, Active, currentTimestamp, full_name];
+        const values = [formattedTech_Name, Rating, Start_date, Description, currentTimestamp];
 
         //////////////////////
 
-        const sql2 = 'INSERT INTO emp_master (EMP_Assign_id ,Super_Visor,Role,Tech_Assign,Gender,Grade,Active,Start_date,EMP_id) VALUES ?;';
-        const transformedData = Emp_table.map(item => [
-            (item.id),
-            item.Super_Visor.trim().charAt(0).toUpperCase() + item.Super_Visor.trim().slice(1).toLowerCase(),
-            item.Role.trim().charAt(0).toUpperCase() + item.Role.trim().slice(1).toLowerCase(),
-            item.Tech_Assign.trim().charAt(0).toUpperCase() + item.Tech_Assign.trim().slice(1).toLowerCase(),
-            item.Gender,
-            item.Grade.trim().charAt(0).toUpperCase() + item.Grade.trim().slice(1).toLowerCase(),
-            item.Active,
+        const sql2 = 'INSERT INTO tech_segment (Tech_segment_name, Tech_segment_Rating, Start_date, Tech_segment_Description,Tech_id,Tech_segment_id) VALUES ?;';
+        const transformedData = segment.map(item => [
+            item.Tech_segment_Name.trim().charAt(0).toUpperCase() + item.Tech_segment_Name.trim().slice(1).toLowerCase(),
+            item.Rating,
             item.Start_date,
-            currentTimestamp
+            item.Description,
+            currentTimestamp,
+            item.id
+
         ]);
 
 
         // sending data 
-        const emp_data = await conn.query(sql1, values);
+        const item_data = await conn.query(sql1, values);
 
-        if (emp_data[0].affectedRows !== undefined && emp_data[0].affectedRows === 1) {
-            const cust_site_data = await conn.query(sql2, [transformedData]);
+        console.log('1')
 
-            if (cust_site_data[0].affectedRows !== undefined && cust_site_data[0].affectedRows >= 1) {
+        if (item_data[0].affectedRows !== undefined && item_data[0].affectedRows === 1) {
+            const Segment_data = await conn.query(sql2, [transformedData]);
+            console.log('2')
 
-                transactionSuccess = true;
+
+            if (sub_segment.length !== 0 && Segment_data[0].affectedRows !== undefined && Segment_data[0].affectedRows >= 1) {
+
+                const sql3 = 'INSERT INTO Tech_Sub_Segment (Tech_sub_segment_name, Rating, Start_date, Description,Tech_id,Tech_segment_id,Tech_sub_segmeny_id) VALUES ?;';
+                const transformedData2 = sub_segment.map(item => [
+                    item.Tech_sub_segment_Name.trim().charAt(0).toUpperCase() + item.Tech_sub_segment_Name.trim().slice(1).toLowerCase(),
+                    item.Rating,
+                    item.Start_date,
+                    item.Description,
+                    currentTimestamp,
+                    item.segment_id,
+                    item.id
+
+                ]);
+
+                const sub_seg = await conn.query(sql3, [transformedData2]);
+
+                console.log('3')
+
+
+                if (sub_seg[0].affectedRows !== undefined && sub_seg[0].affectedRows >= 1) {
+
+                    transactionSuccess = true;
+
+                }
 
             }
+            else {
+
+                if (Segment_data[0].affectedRows !== undefined && Segment_data[0].affectedRows >= 1) {
+
+                    transactionSuccess = true;
+
+                }
+
+            }
+
         }
 
         if (transactionSuccess) {
             await conn.commit();
-            res.status(200).send('Data inserted successfully.');
+            res.status(200).send({message:"Data Saved Successfully"});
         } else {
             await conn.rollback();
-            res.status(500).send('Employee Alredy exist.');
+            res.status(409).send({message:"Dublicate Entry"});
         }
 
     } catch (error) {
-        console.log(error)
+        console.log("catch",error)
         await conn.rollback();
-        res.status(500).send(error);
+        res.status(500).send({message:error});
 
     }
 
