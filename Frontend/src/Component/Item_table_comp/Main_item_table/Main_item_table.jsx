@@ -10,7 +10,7 @@ import { Item_Table_context } from '../../../Context/Item_table_context/Item_tab
 import Date_fn from '../../../Helper_fn/Date_fn';
 const Main_item_table = () => {
 
-    const { Item_save_btn, set_Item_save_btn, item_main_table_data, set_item_main_table_data,Set_segment_vis } = useContext(Item_Table_context)
+    const { Item_save_btn, set_Item_save_btn,set_item_main_table_data,disable_form} = useContext(Item_Table_context)
 
     //change item_form_vis //setup arrow img
     const [item_arrow, set_item_arrow] = useState(true)
@@ -48,9 +48,12 @@ const Main_item_table = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
+            if(!disable_form){
+
             set_item_main_table_data(value)
             set_Item_save_btn(true)
             // Set_segment_vis(true)
+            }
         },
     })
 
@@ -100,6 +103,7 @@ const Main_item_table = () => {
                                 value={values.Tech_Name}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
                         <td><label htmlFor="">** Rating :</label></td>
@@ -110,6 +114,7 @@ const Main_item_table = () => {
                                 className='client_input_fields'
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
 
                             >
                                 <option value="" defaultValue='' key='default'>Select</option>
@@ -127,6 +132,7 @@ const Main_item_table = () => {
                                 value={values.Rating}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             /> */}
                         </td>
                         <td><label htmlFor="">** Start Date :</label></td>
@@ -138,6 +144,7 @@ const Main_item_table = () => {
                                 value={values.Start_date}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
                     </tr>
@@ -151,6 +158,7 @@ const Main_item_table = () => {
                                 value={values.Description}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
                     </tr>

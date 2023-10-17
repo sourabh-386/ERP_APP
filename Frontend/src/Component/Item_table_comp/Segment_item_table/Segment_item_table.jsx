@@ -14,17 +14,19 @@ import Date_fn from '../../../Helper_fn/Date_fn';
 const Segment_item_table = () => {
 
     //setup arrow img
-    const { Item_save_btn, segment, set_segment, segment_vis, Set_segment_vis } = useContext(Item_Table_context)
+    const { Item_save_btn, segment, set_segment, disable_form } = useContext(Item_Table_context)
     const [segment_arrow, set_segment_arrow] = useState(false)
 
 
     const segment_item_vis_fn = () => {
-        if (Item_save_btn) {
-            segment_arrow ? set_segment_arrow(false) : set_segment_arrow(true)
-        }
-        else {
-            toast.error(<div className='error_box'>Save Tech Details</div>)
+        if (!disable_form) {
+            if (Item_save_btn) {
+                segment_arrow ? set_segment_arrow(false) : set_segment_arrow(true)
+            }
+            else {
+                toast.error(<div className='error_box'>Save Tech Details</div>)
 
+            }
         }
     }
 
@@ -84,9 +86,17 @@ const Segment_item_table = () => {
 
     ///open segment first  time
     useEffect(() => {
-
-        Item_save_btn? set_segment_arrow(true) : set_segment_arrow(false)
+        if (!disable_form) {
+            Item_save_btn ? set_segment_arrow(true) : set_segment_arrow(false)
+        }
     }, [Item_save_btn])
+
+
+    ///disable form
+    useEffect(() => {
+
+        disable_form ? set_segment_arrow(false) : ''
+    }, [disable_form])
 
 
     return (

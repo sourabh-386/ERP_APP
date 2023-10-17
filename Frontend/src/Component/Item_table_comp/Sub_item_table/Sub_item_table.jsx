@@ -16,20 +16,22 @@ const Sub_item_table = () => {
 
 
     //setup arrow img
-    const { segment, Item_save_btn, sub_segment, set_sub_segment } = useContext(Item_Table_context)
+    const { segment, Item_save_btn, sub_segment, set_sub_segment, disable_form } = useContext(Item_Table_context)
     const [segment_arrow, set_segment_arrow] = useState(false)
     const segment_item_vis_fn = () => {
-        if (Item_save_btn) {
-            if (segment.length !== 0) {
-                segment_arrow ? set_segment_arrow(false) : set_segment_arrow(true)
+        if (!disable_form) {
+            if (Item_save_btn) {
+                if (segment.length !== 0) {
+                    segment_arrow ? set_segment_arrow(false) : set_segment_arrow(true)
+                }
+                else {
+                    toast.error(<div className='error_box'>Create Tech Segment</div>)
+                }
             }
             else {
-                toast.error(<div className='error_box'>Create Tech Segment</div>)
-            }
-        }
-        else {
-            toast.error(<div className='error_box'>Save Tech Details</div>)
+                toast.error(<div className='error_box'>Save Tech Details</div>)
 
+            }
         }
 
     }
@@ -45,7 +47,7 @@ const Sub_item_table = () => {
         Start_date: Date_fn(),
         Description: '',
         id: '',
-        segment_id:''
+        segment_id: ''
     }
 
     const valid = Yup.object({
@@ -63,14 +65,14 @@ const Sub_item_table = () => {
 
             let unique_id = new Date().getTime()
 
-            const sample= segment.filter((data) => {
+            const sample = segment.filter((data) => {
                 return (data.Tech_segment_Name === value.Tech_Segment)
             })
 
-           const seg_id= sample[0].id
-        //    console.log(cust_site_id)
+            const seg_id = sample[0].id
+            //    console.log(cust_site_id)
 
-            set_sub_segment([...sub_segment, { ...value, id: unique_id,segment_id:seg_id }])
+            set_sub_segment([...sub_segment, { ...value, id: unique_id, segment_id: seg_id }])
 
             console.log(sub_segment)
             resetForm()
@@ -105,7 +107,13 @@ const Sub_item_table = () => {
     //auto relode state 
     const [, setState] = useState(false)
 
-  
+
+    ///disable form
+    useEffect(() => {
+
+        disable_form ? set_segment_arrow(false) : ''
+    }, [disable_form])
+
 
     return (
         <div className={style.main_item_table}>

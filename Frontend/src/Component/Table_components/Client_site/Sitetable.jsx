@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './Sitetable.css'
+import style from '../../Item_table_comp/Segment_item_table/Segment_item_table.module.css'
 import { useFormik } from 'formik'
 // import plus_img from'.../../../'
 import down_img from '../../../assets/Images/down.png'
@@ -10,23 +11,36 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react'
 import Date_fn from '../../../Helper_fn/Date_fn'
+import Site_data from '../Site_data/Site_data'
+import Site_data_data from '../../../Sub_component/Site_data_data/Site_data_data'
 
 const Sitetable = () => {
 
-    const { site_data, set_site_data, editdata, add_edit_data } = useContext(Table_context)
+    const { Cust_save_btn, site_data, set_site_data } = useContext(Table_context)
 
+    const [Site_arrow, set_Site_arrow] = useState(false)
+
+    const site_vis_fn = () => {
+        if (Cust_save_btn) {
+            Site_arrow ? set_Site_arrow(false) : set_Site_arrow(true)
+        }
+        else {
+            toast.error(<div className='error_box'>Save Customer Details</div>)
+
+        }
+    }
 
     //store cuntry city ,state list
     const [country_list, set_country_list] = useState([''])
 
     // const country_value = useRef('');
 
-//     console.log(site_data.map(item => [item.Site_Name])
-// )
+    //     console.log(site_data.map(item => [item.Site_Name])
+    // )
 
 
     const valid = Yup.object({
-        Site_Name: Yup.string().min(2).max(40).required().notOneOf(site_data.map(item => item.Site_Name),'This Site Already Exist'),
+        Site_Name: Yup.string().min(2).max(40).required().notOneOf(site_data.map(item=>item.Site_Name),'Site Already Exist'),
         Address1: Yup.string().min(5).max(60).required(),
         Country: Yup.string().min(2).max(30).required(),
         State: Yup.string().min(2).max(30).required(),
@@ -49,20 +63,20 @@ const Sitetable = () => {
         id: ''
     }
 
-    useEffect(() => {
-        if (editdata !== null) {
-            setFieldValue('Country', editdata.Country)
-            setFieldValue('State', editdata.State)
-            setFieldValue('City', editdata.City)
-            setFieldValue('Address1', editdata.Address1)
-            setFieldValue('Address2', editdata.Address2)
-            setFieldValue('Address3', editdata.Address3)
-            setFieldValue('Address4', editdata.Address4)
-            setFieldValue('Site_Name', editdata.Site_Name)
-            setFieldValue('PIN_Code', editdata.PIN_Code)
-            setFieldValue('Start_date', editdata.Start_date)
-        }
-    }, [editdata])
+    // useEffect(() => {
+    //     if (editdata !== null) {
+    //         setFieldValue('Country', editdata.Country)
+    //         setFieldValue('State', editdata.State)
+    //         setFieldValue('City', editdata.City)
+    //         setFieldValue('Address1', editdata.Address1)
+    //         setFieldValue('Address2', editdata.Address2)
+    //         setFieldValue('Address3', editdata.Address3)
+    //         setFieldValue('Address4', editdata.Address4)
+    //         setFieldValue('Site_Name', editdata.Site_Name)
+    //         setFieldValue('PIN_Code', editdata.PIN_Code)
+    //         setFieldValue('Start_date', editdata.Start_date)
+    //     }
+    // }, [editdata])
 
 
     const { values, errors, touched, handleBlur, resetForm, handleChange, handleSubmit, setFieldValue } = useFormik({
@@ -71,15 +85,10 @@ const Sitetable = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
-            const time=new Date().getTime()
-            if (editdata !== null) {
-                // console.log(value)
-                add_edit_data({ ...value, id: editdata.id })
-            }
-            else {
-                set_site_data([...site_data, { ...value, id:time }])
-            }
+            const time = new Date().getTime()
+            set_site_data([...site_data, { ...value, id: time }])
 
+            console.log('working')
             // resetForm()
 
         }
@@ -90,25 +99,25 @@ const Sitetable = () => {
     //validation fn
     const validation_fn = () => {
         if (errors.Site_Name) {
-            toast.error(errors.Site_Name)
+            toast.error(<div className='error_box'>{errors.Site_Name}</div>)
         }
         else if (errors.Address1) {
-            toast.error(errors.Address1)
+            toast.error(<div className='error_box'>{errors.Address1}</div>)
         }
         else if (errors.Country) {
-            toast.error(errors.Country)
+            toast.error(<div className='error_box'>{errors.Country}</div>)
         }
         else if (errors.State) {
-            toast.error(errors.State)
+            toast.error(<div className='error_box'>{errors.State}</div>)
         }
         else if (errors.City) {
-            toast.error(errors.City)
+            toast.error(<div className='error_box'>{errors.City}</div>)
         }
         else if (errors.PIN_Code) {
-            toast.error(errors.PIN_Code)
+            toast.error(<div className='error_box'>{errors.PIN_Code}</div>)
         }
         else if (errors.Start_date) {
-            toast.error(errors.Start_date)
+            toast.error(<div className='error_box'>{errors.Start_date}</div>)
         }
 
     }
@@ -147,103 +156,112 @@ const Sitetable = () => {
 
 
     return (
-        <div className='sitetable_main'>
+        <div className={style.main_item_table}>
 
-            <div className='add_client_box'>
-                <p class='bi bi-caret-right-fill'></p>
+            <div className='add_client_box' onClick={() => { site_vis_fn() }} >
+                <p class={Site_arrow ? 'bi bi-caret-down-fill' : 'bi bi-caret-right-fill'}></p>
                 <b >Site Details</b>
                 <div className='heading_underline'></div>
             </div>
-            
+            <br />
 
 
             <form onSubmit={handleSubmit}>
-                <div >
-                    <table className='site_input_table'>
+                <div className={Site_arrow ? style.form : style.form_hid}>
+                    <table className={style.site_table}>
                         <tr>
-                            <td>
-                                <label htmlFor="">** Site Name : </label>
-                            </td>
+                            <th>S.No</th>
+                            <th>** Site Name</th>
+                            <th>** Address1</th>
+                            <th>Address2</th>
+                            <th>Address3</th>
+                            <th>Address4</th>
+                            <th>** Country</th>
+                            <th>** State</th>
+                            <th>** City</th>
+                            <th>** PIN Code</th>
+                            <th>** Start date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        {
+                            site_data.map((data, index) => {
+                                return (
+                                    <Site_data data={data} index={index} />
+                                )
+                            })
+                        }
+                        <tr>
+                            <td>{site_data.length+1}</td>
                             <td>
                                 <input
                                     type="text"
                                     name='Site_Name'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Site_Name}
                                 // ref={country_value}
                                 />
                             </td>
-                            <td>
-                                <label htmlFor="">** Address1 : </label>
-                            </td>
+
                             <td>
                                 <input
                                     type="text"
                                     name='Address1'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Address1}
                                 />
                             </td>
-                            <td>
-                                <label htmlFor="" className='label_margin'>Address2 : </label>
-                            </td>
+
                             <td>
                                 <input
                                     type="text"
                                     name='Address2'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Address2}
                                 />
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label htmlFor="" className='label_margin'>Address3 : </label>
-                            </td>
+
+
                             <td>
                                 <input
                                     type="text"
                                     name='Address3'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Address3}
                                 />
                             </td>
-                            <td>
-                                <label htmlFor="" className='label_margin'>Address4 : </label>
-                            </td>
+
                             <td>
                                 <input
                                     type="text"
                                     name='Address4'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Address4}
                                 />
                             </td>
+
                             <td>
-                                <label htmlFor="">** Country : </label>
-                            </td>
-                            <td>
-                                <div className='List_of_values'>
-                                    <input
-                                        type="text"
-                                        name='Country'
-                                        className='client_input_fields'
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.Country}
-                                    // ref={country_value}
-                                    />
-                                    <img src={down_img} alt="img" id='arrow_down_img' onClick={() => { toggle_country_list() }} />
+                                {/* <div className={style.input_box}> */}
+                                <input
+                                    type="text"
+                                    name='Country'
+                                    className={style.input_box}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.Country}
+                                // ref={country_value}
+                                />
+                                {/* <img src={down_img} alt="img" id='arrow_down_img' onClick={() => { toggle_country_list() }} />
                                     <div className='country_list' id='country_list_toggle_id' >
                                         <table>
                                             <tr>
@@ -266,93 +284,71 @@ const Sitetable = () => {
 
                                         <hr />
                                         <p className='client_list_search' onClick={() => search_onclick_fn()}><a href="#">Search</a></p>
-                                    </div>
-                                </div>
+                                    </div> */}
+                                {/* </div> */}
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label htmlFor="">** State : </label>
-                            </td>
+
+
                             <td>
                                 <input
                                     type="text"
                                     name='State'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.State}
                                 />
                             </td>
-                            <td>
-                                <label htmlFor="">** City : </label>
-                            </td>
+
                             <td>
                                 <input
                                     type="text"
                                     name='City'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.City}
                                 />
                             </td>
-                            <td>
-                                <label htmlFor="">** Pin Code : </label>
-                            </td>
+
                             <td>
                                 <input
                                     type="text"
                                     name='PIN_Code'
-                                    className='client_input_fields'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.PIN_Code}
                                 />
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label htmlFor="">** Start Date :</label>
-                            </td>
+
+
                             <td>
 
                                 <input
                                     type="date"
                                     name='Start_date'
-                                    className='startdate_input'
+                                    className={style.input_box}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Start_date}
                                 />
 
                             </td>
+                            <td>
+                                <button type='submit'  className='add_btn' onClick={()=>{validation_fn()}}><b>+ADD</b></button>
+                            
+                            </td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
 
                 <div className='Table_save_btn'>
-                    {
-                        editdata !== null ?
-                            <button type='submit' onClick={() => { validation_fn() }}>Save Edit...</button>
-                            :
-                            <button type='submit' onClick={() => { validation_fn() }}>Add Site</button>
-                    }
-                    <ToastContainer
-                        autoClose={1500}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    // theme="colord"
-                    />
+
                 </div>
 
             </form>
-
 
 
 

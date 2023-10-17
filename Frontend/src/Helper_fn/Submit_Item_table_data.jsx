@@ -2,8 +2,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 //Submit data to backend
-const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, sub_segment) => {
-
+const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, sub_segment, set_disable_form,disable_form) => {
+if(!disable_form){
     if (Item_save_btn) {
 
         if (segment.length !== 0) {
@@ -19,9 +19,10 @@ const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, su
                     if (return_value.length === 0) {
 
                         /////////////////////////////
-                        send_item_data(item_main_table_data, segment, sub_segment)
+                        send_item_data(item_main_table_data, segment, sub_segment,set_disable_form)
                         ////////////////////////////
-                        // console.log(item_main_table_data,segment,sub_segment)
+                        // console.log(item_main_table_data, segment, sub_segment,se)
+                        // set_disable_form(true)
 
                     }
                     else {
@@ -32,27 +33,32 @@ const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, su
                 }
                 else {
                     // console.log('no sub_segment')
-                    send_item_data(item_main_table_data, segment, sub_segment)
+                    send_item_data(item_main_table_data, segment, sub_segment,set_disable_form)
+                    // set_disable_form(true)
 
                     /////////////////////////////
                 }
 
             }
             else {
-                toast.error(<div style={{ fontSize: '16px' }}>Dublicate Tech Segment </div>)
+                toast.error(<div className='error_box'>Dublicate Tech Segment </div>)
 
             }
 
         }
         else {
-            toast.error(<div style={{ fontSize: '16px' }}>Enter Atleast One Tech Segment</div>)
+            toast.error(<div className='error_box'>Enter Atleast One Tech Segment</div>)
         }
 
     }
     else {
-        toast.error(<div style={{ fontSize: '16px' }}>Save Tech Details</div>)
+        toast.error(<div className='error_box'>Save Tech Details</div>)
     }
 
+}
+else{
+    toast.error(<div className='error_box'>Tech Details alredy saved</div>)
+}
 }
 
 
@@ -99,7 +105,7 @@ function findDuplicates_sub_seg(arr) {
 
 //sending data fn
 
-const send_item_data = async (item_main_table_data, segment, sub_segment) => {
+const send_item_data = async (item_main_table_data, segment, sub_segment,set_disable_form) => {
 
     try {
         const res = await axios({
@@ -112,17 +118,18 @@ const send_item_data = async (item_main_table_data, segment, sub_segment) => {
             }
         });
 
-        toast.success(<div className='error_box'>{res.data}</div>)
-        
+        toast.success(<div className='error_box'>Item Data Saved</div>)
+        set_disable_form(true)
+
     } catch (error) {
 
-        console.log('catch',error)
+        console.log('catch', error)
 
-        if(error.request.status==404){
+        if (error.request.status == 404) {
             toast.error(<div className='error_box'>Network Error Try Again</div>)
 
         }
-        else{
+        else {
             toast.error(<div className='error_box'>Item Alredy Exist</div>)
         }
 

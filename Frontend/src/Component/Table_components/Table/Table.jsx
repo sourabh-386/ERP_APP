@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import './Table.css'
+import style from '../../Item_table_comp/Main_item_table/Main_item_table.module.css'
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import moment from 'moment/moment'
@@ -15,9 +16,26 @@ import Date_fn from '../../../Helper_fn/Date_fn'
 
 const Table = () => {
 
-    const { pagemove, setpagemove, submit_btn, site_data, Customer_data, set_customer_data, set_submit_btn, set_site_arrow } = useContext(Table_context)
+    const { Cust_save_btn, set_Cust_save_btn, Cust_main_table_data, set_Cust_main_table_data } = useContext(Table_context)
+
+
+    const [Cust_arrow, set_Cust_arrow] = useState(true)
+
+    const arrow_set_fn = () => {
+
+        if (Cust_save_btn) {
+            Cust_arrow ? set_Cust_arrow(false) : set_Cust_arrow(true)
+        }
+        else {
+            toast.error(<div className="error_box">Save Customer Details</div>)
+
+        }
+    }
+
     const [organisation_list, setorganisation_list] = useState([''])
-    // console.log(submit_btn)
+
+
+    // formik start
     const valid = Yup.object({
         Customer_Name: Yup.string().min(2).max(40).required(),
         Tax_Registration: Yup.string().required(),
@@ -50,11 +68,11 @@ const Table = () => {
 
             console.log(value)
 
-            set_customer_data(value)
+            set_Cust_main_table_data(value)
 
-            set_site_arrow(true)
+            set_Cust_save_btn(true)
 
-            set_submit_btn(true)
+            // set_submit_btn(true)
 
         },
 
@@ -114,23 +132,19 @@ const Table = () => {
 
     ////////
     const onchange_event_fn = (e) => {
-        set_submit_btn(false)
+        set_Cust_save_btn(false)
         handleChange(e)
     }
 
     return (
-        <div className='table_main' >
-
-
-            <div className='add_client_box'>
-                <p class='bi bi-caret-right-fill'></p>
+        <div className={style.main_item_table} >
+            <div className='add_client_box' onClick={() => { arrow_set_fn() }}>
+                <p class={Cust_arrow ? 'bi bi-caret-down-fill' : 'bi bi-caret-right-fill'}></p>
                 <b>Customers</b>
                 <div className='heading_underline'></div>
             </div>
-            <form className='table_input' onSubmit={handleSubmit}>
-
-
-                <table className='main_input_table'>
+            <form className={Cust_arrow ? style.form : style.form_vis} onSubmit={handleSubmit}>
+                <table className={style.table}>
                     <tr>
                         <td><label htmlFor="">** Customer Name :</label></td>
                         <td>
@@ -218,12 +232,24 @@ const Table = () => {
                             </div></td>
                         <td></td>
                     </tr>
-                </table>
+                    <tr>
+                        <td colSpan='6'>
+                            <button onClick={(e) => { validation_fn(e) }} type='submit' className={Cust_save_btn ? style.btn : `${style.btn} ${style.btn_color}`}>Save</button>
 
-                <br />
-                <div className='Table_save_btn'>
-                    <button className={submit_btn ? 'Table_save_btn_btn' : 'Table_save_btn_btn Table_save_btn_btn_color'} type='submit' onClick={(e) => { validation_fn(e) }}><b>Save</b></button>
-                </div>
+                            <ToastContainer
+                                autoClose={1500}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                            // theme="colord"
+                            />
+                        </td>
+                    </tr>
+                </table>
             </form>
 
         </div>

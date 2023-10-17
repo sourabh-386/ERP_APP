@@ -23,13 +23,19 @@ const Item_Table_context_provider = ({ children }) => {
     //auto relode state 
     const [demostate, setState] = useState(false)
 
+
+    // disable form input 
+    const[disable_form,set_disable_form]=useState(false)
+
   
     const passing = {
         Item_save_btn, set_Item_save_btn,
         item_main_table_data, set_item_main_table_data,
         segment, set_segment,
         sub_segment, set_sub_segment,
-        demostate,setState
+        demostate,setState,
+        disable_form,set_disable_form
+
     }
 
     return (
