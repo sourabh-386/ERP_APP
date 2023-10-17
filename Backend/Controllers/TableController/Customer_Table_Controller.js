@@ -51,7 +51,7 @@ exports.Customer_table_fn = async (req, res) => {
 
         //////////////////////////////
 
-       
+
 
 
         // sending data 
@@ -62,7 +62,7 @@ exports.Customer_table_fn = async (req, res) => {
         if (cust_data[0].affectedRows !== undefined && cust_data[0].affectedRows === 1) {
             const cust_site_data = await conn.query(sql2, [transformedData]);
 
-        console.log('2')
+            console.log('2')
 
             if (site_contact.length !== 0 && cust_site_data[0].affectedRows !== undefined && cust_site_data[0].affectedRows >= 1) {
 
@@ -91,7 +91,7 @@ exports.Customer_table_fn = async (req, res) => {
 
                 }
             }
-            else{
+            else {
                 if (cust_site_data[0].affectedRows !== undefined && cust_site_data[0].affectedRows >= 1) {
 
                     transactionSuccess = true;
@@ -104,16 +104,16 @@ exports.Customer_table_fn = async (req, res) => {
             await conn.commit();
             // const to_mail = contact.map(item => item.email);
             // send_mail_fn(to_mail)
-            res.status(200).send({message:"Data Saved Successfully"});
+            res.status(200).send({ message: "Data Saved Successfully" });
         } else {
             await conn.rollback();
-            res.status(500).send({message:"Dublicate Entry"});
+            res.status(500).send({ message: "Dublicate Entry" });
         }
 
     } catch (error) {
         console.log(error)
         await conn.rollback();
-        res.status(500).send({message:error});
+        res.status(500).send({ message: error });
     }
 
 }

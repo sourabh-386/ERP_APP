@@ -14,25 +14,36 @@ import Date_fn from '../../../Helper_fn/Date_fn';
 const Employee_emp = () => {
 
     //setup arrow img
-    const { Emp_save_btn, emp_hr_table_data, set_emp_hr_table_data,emp_table,set_emp_table,emp} = useContext(Emp_Table_context)
+    const { Emp_save_btn, emp_hr_table_data, set_emp_hr_table_data, emp_table, set_emp_table, emp, disable_form } = useContext(Emp_Table_context)
     const [emp_arrow, set_emp_arrow] = useState(false)
 
 
     //togel form only one time when hr save data 
-    useEffect(() => { 
-      emp?set_emp_arrow(true):set_emp_arrow(false)
+    useEffect(() => {
+        if (!disable_form) {
+        emp ? set_emp_arrow(true) : set_emp_arrow(false)
+        }
     }, [emp])
-    
+
+
+     ///disable form
+     useEffect(() => {
+
+        disable_form ? set_emp_arrow(false) : ''
+    }, [disable_form])
+
 
 
     //togel form
     const employee_emp_vis_fn = () => {
-        if (Emp_save_btn) {
-            emp_arrow ? set_emp_arrow(false) : set_emp_arrow(true)
-        }
-        else {
-            toast.error(<div className='error_box'>Save Employee Details</div>)
+        if (!disable_form) {
+            if (Emp_save_btn) {
+                emp_arrow ? set_emp_arrow(false) : set_emp_arrow(true)
+            }
+            else {
+                toast.error(<div className='error_box'>Save Employee Details</div>)
 
+            }
         }
     }
 
@@ -127,7 +138,7 @@ const Employee_emp = () => {
 
                     }
                     <tr >
-                        <td>{emp_table.length+1}</td>
+                        <td>{emp_table.length + 1}</td>
                         <td>
                             <input
                                 type="text"
@@ -187,7 +198,7 @@ const Employee_emp = () => {
 
                         <td>
 
-                        <select
+                            <select
                                 name="Active"
                                 value={values.Active}
                                 className={style.input_box}
@@ -200,7 +211,7 @@ const Employee_emp = () => {
                                 <option value="No">No</option>
 
                             </select>
-              
+
                         </td>
                         <td>
                             <input

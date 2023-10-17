@@ -10,7 +10,7 @@ import { useContext } from 'react'
 import Date_fn from '../../../Helper_fn/Date_fn'
 const Employee_hr = () => {
 
-    const { Emp_save_btn, set_Emp_save_btn, emp_hr_table_data, set_emp_hr_table_data, emp, set_emp } = useContext(Emp_Table_context)
+    const { Emp_save_btn, set_Emp_save_btn, emp_hr_table_data, set_emp_hr_table_data, emp, set_emp,disable_form } = useContext(Emp_Table_context)
     //change item_form_vis //setup arrow img
     const [item_arrow, set_item_arrow] = useState(true)
 
@@ -55,11 +55,13 @@ const Employee_hr = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
+            if(!disable_form){
             set_emp_hr_table_data(value)
             set_Emp_save_btn(true)
             // console.log(emp_hr_table_data)
             set_emp(true)
             // resetForm()
+            }
 
         },
     })
@@ -122,6 +124,7 @@ const Employee_hr = () => {
                                 value={values.EMP_First_Name}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
 
 
                             />
@@ -136,6 +139,7 @@ const Employee_hr = () => {
                                 value={values.EMP_Middle_Name}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
 
@@ -148,6 +152,7 @@ const Employee_hr = () => {
                                 value={values.EMP_Last_Name}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
                     </tr>
@@ -162,6 +167,7 @@ const Employee_hr = () => {
                                 value={values.Title}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
 
@@ -172,6 +178,7 @@ const Employee_hr = () => {
                                 value={values.Gender}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                                 name="Gender" >
                                     <option value="" defaultValue='' key='default'>Select</option>
                                     <option value="Male">Male</option>
@@ -190,6 +197,7 @@ const Employee_hr = () => {
                                 value={values.Grade}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
 
@@ -204,6 +212,7 @@ const Employee_hr = () => {
                             value={values.Start_date}
                             onChange={(e) => { onchange_event_fn(e) }}
                             onBlur={handleBlur}
+                            disabled={disable_form}
                         /></td>
                         <td><label htmlFor="">** Active :</label></td>
                         <td>
@@ -213,6 +222,7 @@ const Employee_hr = () => {
                                 className='client_input_fields'
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
 
                             >
                                 <option value="" defaultValue='' key='default'>Select</option>

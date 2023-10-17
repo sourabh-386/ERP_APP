@@ -2,7 +2,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 //Submit data to backend
-const Submit_customer_details_fn = (Cust_save_btn, Cust_main_table_data, site_data, site_contact) => {
+const Submit_customer_details_fn = (Cust_save_btn, Cust_main_table_data, site_data, site_contact,set_disable_form,disable_form) => {
+
+
+    if(!disable_form){
 
     if (Cust_save_btn) {
 
@@ -20,7 +23,7 @@ const Submit_customer_details_fn = (Cust_save_btn, Cust_main_table_data, site_da
 
                         // console.log('contact')
                         /////////////////////////////
-                        send_cust_data(Cust_main_table_data, site_data,site_contact)
+                        send_cust_data(Cust_main_table_data, site_data,site_contact,set_disable_form)
                         ////////////////////////////
                         // console.log(Cust_main_table_data, site_data, site_contact)
 
@@ -33,7 +36,7 @@ const Submit_customer_details_fn = (Cust_save_btn, Cust_main_table_data, site_da
                 }
                 else {
                     console.log('no contact')
-                    send_cust_data(Cust_main_table_data, site_data,site_contact)
+                    send_cust_data(Cust_main_table_data, site_data,site_contact,set_disable_form)
 
 
                     /////////////////////////////
@@ -54,13 +57,17 @@ const Submit_customer_details_fn = (Cust_save_btn, Cust_main_table_data, site_da
     else {
         toast.error(<div className='error_box'>Save Customer Details</div>)
     }
+}
+else{
+    toast.error(<div className='error_box'>Customer Details alredy saved</div>)
+}
 
 }
 
 
 
 //sending data to backend
-const send_cust_data = async (Cust_main_table_data, site_data, site_contact) => {
+const send_cust_data = async (Cust_main_table_data, site_data, site_contact,set_disable_form) => {
 
     try {
         await axios({
@@ -75,6 +82,7 @@ const send_cust_data = async (Cust_main_table_data, site_data, site_contact) => 
 
 
         toast.success(<div className='error_box'>Customer Data Saved</div>)
+        set_disable_form(true)
 
     } catch (error) {
 
@@ -91,10 +99,6 @@ const send_cust_data = async (Cust_main_table_data, site_data, site_contact) => 
     }
 
 }
-
-
-
-
 
 
 //function for finding dublicate in segment data

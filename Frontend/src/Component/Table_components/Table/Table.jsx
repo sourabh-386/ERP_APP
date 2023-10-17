@@ -16,7 +16,7 @@ import Date_fn from '../../../Helper_fn/Date_fn'
 
 const Table = () => {
 
-    const { Cust_save_btn, set_Cust_save_btn, Cust_main_table_data, set_Cust_main_table_data } = useContext(Table_context)
+    const { Cust_save_btn, set_Cust_save_btn, Cust_main_table_data, set_Cust_main_table_data,disable_form } = useContext(Table_context)
 
 
     const [Cust_arrow, set_Cust_arrow] = useState(true)
@@ -58,6 +58,8 @@ const Table = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
+            if(!disable_form){
+
             if (value.NDA_Signed) {
                 value.NDA_Signed = "Yes"
             }
@@ -71,10 +73,11 @@ const Table = () => {
             set_Cust_main_table_data(value)
 
             set_Cust_save_btn(true)
+        }
 
-            // set_submit_btn(true)
 
         },
+        
 
 
     })
@@ -155,6 +158,7 @@ const Table = () => {
                                 value={values.Customer_Name}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
+                                disabled={disable_form}
                             />
                         </td>
                         <td>
@@ -168,6 +172,7 @@ const Table = () => {
                                     // className='client_input_fields'
                                     onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
+                                    disabled={disable_form}
                                     value={values.Organisation}
 
                                 />
@@ -205,6 +210,7 @@ const Table = () => {
                             className='client_input_fields'
                             onChange={(e) => { onchange_event_fn(e) }}
                             onBlur={handleBlur}
+                            disabled={disable_form}
                         /></td>
                     </tr>
                     <tr>
@@ -216,6 +222,7 @@ const Table = () => {
                             value={values.Start_date}
                             onChange={(e) => { onchange_event_fn(e) }}
                             onBlur={handleBlur}
+                            disabled={disable_form}
                         /></td>
                         <td>
                             <div className='checkbox_input'>
@@ -226,6 +233,7 @@ const Table = () => {
                                     value={values.NDA_Signed}
                                     onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
+                                    disabled={disable_form}
 
 
                                 />

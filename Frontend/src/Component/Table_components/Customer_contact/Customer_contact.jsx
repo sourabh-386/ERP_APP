@@ -13,11 +13,13 @@ import Customer_contact_table from '../Customer_contact_table/Customer_contact_t
 // import Customer_contact_table from '../Customer_contact_table/Customer_contact_table'
 const Customer_contact = () => {
 
-    const { site_contact,setState ,set_site_contact, site_data, Cust_save_btn } = useContext(Table_context)
+    const { site_contact,setState ,set_site_contact, site_data, Cust_save_btn,disable_form } = useContext(Table_context)
 
     const [contact_vis, set_contact_vis] = useState(false)
 
     const contact_vis_fn = () => {
+        if (!disable_form) {
+
         if (Cust_save_btn) {
             if (site_data.length !== 0) {
                 set_contact_vis(!contact_vis)
@@ -30,6 +32,7 @@ const Customer_contact = () => {
             toast.error(<div className='error_box'>Save Customer Details</div>)
 
         }
+    }
 
     }
 
@@ -106,6 +109,12 @@ const Customer_contact = () => {
             toast.error(errors.designation)
         }
     }
+
+     ///disable form
+     useEffect(() => {
+
+        disable_form ? set_contact_vis(false) : ''
+    }, [disable_form])
 
 
     return (

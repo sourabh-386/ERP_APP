@@ -22,13 +22,19 @@ const Emp_Table_context_provider = ({ children }) => {
 
     // auto open aemp details one time
     const [emp,set_emp]=useState(false)
+
+    
+    // disable form input 
+    const[disable_form,set_disable_form]=useState(false)
+
     
     const passing = {
         Emp_save_btn, set_Emp_save_btn,
         emp_hr_table_data, set_emp_hr_table_data,
         emp_table, set_emp_table,
         demostate,setState,
-        emp,set_emp
+        emp,set_emp,
+        disable_form,set_disable_form
     }
 
     return (

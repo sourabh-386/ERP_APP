@@ -2,8 +2,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 //Submit data to backend
-const Submit_emp_details_fn = (Emp_save_btn, emp_table, emp_hr_table_data) => {
-
+const Submit_emp_details_fn = (Emp_save_btn, emp_table, emp_hr_table_data,set_disable_form,disable_form) => {
+    if(!disable_form){
     if (Emp_save_btn) {
 
         if (emp_table.length !== 0) {
@@ -11,7 +11,7 @@ const Submit_emp_details_fn = (Emp_save_btn, emp_table, emp_hr_table_data) => {
             //////////////////////////////
             // console.log(Emp_save_btn, emp_table, emp_hr_table_data)
             ///////////////////////////////
-            send_emp_data(emp_hr_table_data, emp_table)
+            send_emp_data(emp_hr_table_data, emp_table,set_disable_form)
 
         } else {
 
@@ -23,16 +23,20 @@ const Submit_emp_details_fn = (Emp_save_btn, emp_table, emp_hr_table_data) => {
     else {
         toast.error(<div className='error_box'>Save Employee Details</div>)
     }
+}
+else{
+    toast.error(<div className='error_box'>Employees Details alredy saved</div>)
+}
 
 }
 
 //send data to backend
-const send_emp_data = async (emp_hr_table_data, emp_table) => {
+const send_emp_data = async (emp_hr_table_data, emp_table,set_disable_form) => {
 
     try {
         await axios({
             method: 'post',
-            url: 'http://localhost:3008/data/emp_dat',
+            url: 'http://localhost:3008/data/emp_data',
             data: {
                 Hr_table: emp_hr_table_data,
                 Emp_table: emp_table
@@ -41,6 +45,8 @@ const send_emp_data = async (emp_hr_table_data, emp_table) => {
 
 
         toast.success(<div className='error_box'>Employees Data Saved succesfully</div>)
+        set_disable_form(true)
+
     } catch (error) {
         console.log(error)
     }

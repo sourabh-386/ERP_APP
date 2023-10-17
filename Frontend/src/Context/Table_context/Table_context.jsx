@@ -25,7 +25,7 @@ const Table_context_provider = ({ children }) => {
     const [demostate, setState] = useState(false)
 
     // disable changes on submit
-    const[disable_form,set_disable_form]=useState(true)
+    const[disable_form,set_disable_form]=useState(false)
 
 
     const passing = {

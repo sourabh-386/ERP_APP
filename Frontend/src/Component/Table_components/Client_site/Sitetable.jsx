@@ -16,11 +16,13 @@ import Site_data_data from '../../../Sub_component/Site_data_data/Site_data_data
 
 const Sitetable = () => {
 
-    const { Cust_save_btn, site_data, set_site_data } = useContext(Table_context)
+    const { Cust_save_btn, site_data, set_site_data,disable_form } = useContext(Table_context)
 
     const [Site_arrow, set_Site_arrow] = useState(false)
 
     const site_vis_fn = () => {
+
+        if (!disable_form) {
         if (Cust_save_btn) {
             Site_arrow ? set_Site_arrow(false) : set_Site_arrow(true)
         }
@@ -28,6 +30,7 @@ const Sitetable = () => {
             toast.error(<div className='error_box'>Save Customer Details</div>)
 
         }
+    }
     }
 
     //store cuntry city ,state list
@@ -94,6 +97,21 @@ const Sitetable = () => {
         }
 
     });
+
+    
+    ///open site first  time
+    useEffect(() => {
+        if (!disable_form) {
+            Cust_save_btn ? set_Site_arrow(true) : set_Site_arrow(false)
+        }
+    }, [Cust_save_btn])
+
+
+     ///disable form
+     useEffect(() => {
+
+        disable_form ? set_Site_arrow(false) : ''
+    }, [disable_form])
 
 
     //validation fn

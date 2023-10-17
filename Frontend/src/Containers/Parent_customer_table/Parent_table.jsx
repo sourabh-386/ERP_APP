@@ -14,45 +14,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Submit_customer_details_fn } from '../../Helper_fn/Submit_customer_details'
 const Parent_table = () => {
 
-    const {Cust_save_btn,Cust_main_table_data,site_data,site_contact } = useContext(Table_context)
+    const {Cust_save_btn,Cust_main_table_data,site_data,site_contact,disable_form,set_disable_form } = useContext(Table_context)
     
 
     return (
         <div>
             <div className='outer_parent_div'>
-                {/* <div className={pagemove ? 'parent_class_move' : 'parent_table_box'}>
-                    <div className='table_data_box' >
-                        <Table />
-                        <div className='add_client_box' onClick={()=>{set_site_arrow_fn()}}>
-                            <p class={site_arrow?'bi bi-caret-down-fill':'bi bi-caret-right-fill'} ></p>
-                            <b > Site</b>
-                            <div className='heading_underline'></div>
-                        </div>
-                        <br />
-                        <div className={site_arrow?'site_data_outer_box':'site_data_outer_box_hid'}>
-                            
-                        <Site_data />
-                        </div>
-
-                        <div className='contact_info_main'>
-                            <Customer_contact />
-
-                        </div>
-                    </div>
-
-                    <div className='site_data_box'>
-                        <Sitetable />
-
-
-                        <div className='site_submit'>
-                            <button type='submit' onClick={() => { setpagemove(false) }}>Save</button>
-                        </div>
-                    </div>
-
-
-
-                </div> */}
-
+         
                 <div className='main_item_table_box'>
                     <Table />
                 </div>
@@ -63,8 +31,8 @@ const Parent_table = () => {
                     <Customer_contact/>
                 </div>
                 <div className='Item_table_btns'>
-                    <button onClick={()=>{Submit_customer_details_fn(Cust_save_btn,Cust_main_table_data,site_data,site_contact)}}><b>Submit</b></button>
-                    <button><b>Create New</b></button>
+                    <button onClick={()=>{Submit_customer_details_fn(Cust_save_btn,Cust_main_table_data,site_data,site_contact,set_disable_form,disable_form)}}><b>Submit</b></button>
+                    <button onClick={() => window.location.reload(false)}><b>Create New</b></button>
 
                 </div>
 
