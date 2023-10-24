@@ -2,7 +2,8 @@ import React from 'react'
 import './Home.css'
 import { motion } from 'framer-motion'
 // import Customer_contact from '../../Component/Table_components/Customer_contact/Customer_contact'
-import Random from '../../Sub_component/random'
+// import Random from '../../Sub_component/random'
+import Option_box from '../../Sub_component/Reused_comp/Option_box/Option_box'
 const Home = () => {
   return (
     <motion.div
@@ -14,8 +15,9 @@ const Home = () => {
       <div className='side'></div>
       <div className='main_home_div'>
         homepage
-        <Random />
-        <Random />
+        {/* <Random /> */}
+        {/* <Random /> */}
+        <Option_box />
   
 
       </div>

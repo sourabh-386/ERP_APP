@@ -69,14 +69,19 @@ else{
 //sending data to backend
 const send_cust_data = async (Cust_main_table_data, site_data, site_contact,set_disable_form) => {
 
+
     try {
+        const formData = new FormData();
+
+        formData.append('file', Cust_main_table_data.file);
         await axios({
             method: 'post',
             url: 'http://localhost:3008/data/customer_data',
             data: {
                 Cust_main_table_data: Cust_main_table_data,
                 site_data: site_data,
-                site_contact: site_contact
+                site_contact: site_contact,
+                formData:formData
             }
         });
 

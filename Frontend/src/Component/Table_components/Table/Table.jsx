@@ -16,7 +16,7 @@ import Date_fn from '../../../Helper_fn/Date_fn'
 
 const Table = () => {
 
-    const { Cust_save_btn, set_Cust_save_btn, Cust_main_table_data, set_Cust_main_table_data,disable_form } = useContext(Table_context)
+    const { Cust_save_btn, set_Cust_save_btn, Cust_main_table_data, set_Cust_main_table_data, disable_form } = useContext(Table_context)
 
 
     const [Cust_arrow, set_Cust_arrow] = useState(true)
@@ -49,7 +49,8 @@ const Table = () => {
         Tax_Registration: '',
         Start_date: Date_fn(),
         Organisation: '',
-        NDA_Signed: false
+        NDA_Signed: false,
+        files: []
     }
 
 
@@ -58,26 +59,26 @@ const Table = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
-            if(!disable_form){
+            if (!disable_form) {
 
-            if (value.NDA_Signed) {
-                value.NDA_Signed = "Yes"
+                if (value.NDA_Signed) {
+                    value.NDA_Signed = "Yes"
+                }
+                else {
+                    value.NDA_Signed = "No"
+                }
+
+
+                console.log(value)
+
+                set_Cust_main_table_data(value)
+
+                set_Cust_save_btn(true)
             }
-            else {
-                value.NDA_Signed = "No"
-            }
-
-
-            console.log(value)
-
-            set_Cust_main_table_data(value)
-
-            set_Cust_save_btn(true)
-        }
 
 
         },
-        
+
 
 
     })
@@ -238,7 +239,14 @@ const Table = () => {
 
                                 />
                             </div></td>
-                        <td></td>
+                        <td>
+                            <input
+                                type="file"
+                                name="files"
+                                onChange={(e) => {onchange_event_fn(e) }}
+                                multiple
+                            />
+                        </td>
                     </tr>
                     <tr>
                         <td colSpan='6'>

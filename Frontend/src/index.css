@@ -98,3 +98,21 @@
   transition: all 0.3s ease-in-out;
 
 }
+
+select::-ms-expand {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Hide the default arrow by adding a background image */
+  background: url('your-custom-arrow-icon.png') no-repeat;
+  background-position: right center;
+  background-color: white; /* Set the background color as needed */
+  padding: 5px 30px 5px 5px; 
+}
+select::-webkit-calendar-picker-indicator {
+  display: none;
+}
+select::-moz-calendar-picker-indicator {
+  display: none;
+}
+

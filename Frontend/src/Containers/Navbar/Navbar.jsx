@@ -36,6 +36,7 @@ const Navbar = () => {
                     <NavLink className='link link_inside' to="/employee"><h4>Employee</h4></NavLink>
                     <div className='link link_inside'><h4>Nav3</h4></div>
                 </div>
+                <NavLink className='link' to="/admin" onClick={() => { home_box() }}><h4>Admin</h4></NavLink>
 
             </div>
 

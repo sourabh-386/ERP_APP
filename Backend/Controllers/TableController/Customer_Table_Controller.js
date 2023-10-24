@@ -1,5 +1,7 @@
 const path = require('path')
 const mysql = require('mysql2/promise')
+const path=require('path')
+const multer=require('multer')
 const { send_mail_fn } = require('./Helper_functions/Customre_mail_send_fn.js')
 
 exports.Customer_table_fn = async (req, res) => {
@@ -20,17 +22,17 @@ exports.Customer_table_fn = async (req, res) => {
 
         await conn.beginTransaction();
 
-        const { Cust_main_table_data, site_data, site_contact } = req.body
+        const { Cust_main_table_data, site_data, site_contact,formData } = req.body
 
 
         // extracting data 
 
-        const { Customer_Name, Tax_Registration, Start_date, NDA_Signed, Organisation } = Cust_main_table_data;
+        const { Customer_Name, Tax_Registration, Start_date, NDA_Signed, Organisation} = Cust_main_table_data;
 
         const formated_cust_name = Customer_Name.trim().charAt(0).toUpperCase() + Customer_Name.trim().slice(1).toLowerCase();
 
-        const sql1 = 'INSERT INTO client_detail (Customer_Name,Tax_Registration,Start_date,NDA_Signed,Customer_ID,Organisation_Type) VALUES (?, ?, ?, ?, ?, ?)';
-        const values = [formated_cust_name, Tax_Registration, Start_date, NDA_Signed, currentTimestamp, Organisation];
+        const sql1 = 'INSERT INTO client_detail (Customer_Name,Tax_Registration,Start_date,NDA_Signed,Customer_ID,Organisation_Type,file_data) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const values = [formated_cust_name, Tax_Registration, Start_date, NDA_Signed, currentTimestamp, Organisation,formData];
 
 
         /////////////////////

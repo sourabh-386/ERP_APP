@@ -50,11 +50,11 @@ exports.Tech_table_fn = async (req, res) => {
         // sending data 
         const item_data = await conn.query(sql1, values);
 
-        console.log('1')
+        // console.log('1')
 
         if (item_data[0].affectedRows !== undefined && item_data[0].affectedRows === 1) {
             const Segment_data = await conn.query(sql2, [transformedData]);
-            console.log('2')
+            // console.log('2')
 
 
             if (sub_segment.length !== 0 && Segment_data[0].affectedRows !== undefined && Segment_data[0].affectedRows >= 1) {

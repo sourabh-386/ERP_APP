@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion'
 import Item from './Pages/ItemPage/Item'
 import Employee from './Pages/Employee/Employee'
+import AdminPage from './Pages/AdminPage/AdminPage'
 const App = () => {
   return (
     <div className='app_main'>
@@ -17,6 +18,7 @@ const App = () => {
         <Route path='/customer' element={<Customer />} />
         <Route path='/Item' element={<Item />} />
         <Route path='/employee' element={<Employee />} />
+        <Route path='/admin' element={<AdminPage />} />
       </Routes>
       </AnimatePresence>
     </div>

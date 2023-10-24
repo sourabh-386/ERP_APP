@@ -1,0 +1,91 @@
+/* start salary box css */
+
+.salary {
+    /* border: 1px solid black; */
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    gap: 5px 10px;
+
+}
+
+.head1 {
+    grid-column-start: 1;
+    grid-column-end: 7;
+}
+
+
+.head2 {
+    grid-column-start: 9;
+    grid-column-end: 15;
+
+}
+
+.col2 {
+
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+
+.col3 {
+
+    grid-column-start: 5;
+    grid-column-end: 7;
+}
+
+
+.col5 {
+
+    grid-column-start: 9;
+    grid-column-end: 11;
+}
+
+.col6 {
+
+    grid-column-start: 12;
+    grid-column-end: 14;
+}
+
+.to {
+    /* border: 1px solid black; */
+    display: flex;
+    /* flex-direction: ; */
+    justify-content: center;
+    align-items: center;
+    color: rgb(75, 73, 73);
+
+}
+
+
+
+
+
+
+
+
+/* client_box start  */
+
+.client_box {
+    /* border: 1px solid black; */
+    position: relative;
+}
+
+.client_arrow {
+    height: 4.8vh;
+    /* border: 1px solid black; */
+    position: absolute;
+    top: 0vh;
+    margin: 5px;
+    right: 0px;
+    width:4.8vh ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.client_arrow_img {
+    width: 15px;
+    height: 15px;
+    
+}
