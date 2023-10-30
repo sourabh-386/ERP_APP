@@ -69,15 +69,18 @@
     /* border: 1px solid black; */
     position: relative;
 }
+.client_box2 {
+    /* border: 1px solid black; */
+    position: block;
+}
 
 .client_arrow {
     height: 4.8vh;
-    /* border: 1px solid black; */
     position: absolute;
     top: 0vh;
     margin: 5px;
     right: 0px;
-    width:4.8vh ;
+    width: 4.8vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,5 +90,189 @@
 .client_arrow_img {
     width: 15px;
     height: 15px;
+
+}
+
+
+
+
+
+/* client box  */
+.client_box_serach {
+    /* border: 1px solid black; */
+    min-width:100%;
+    max-width: fit-content;
+    max-height: 18vh;
+    overflow: scroll;
+    position: absolute;
+    top: 6vh;
+    /* padding: 5px; */
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.753);
+    font-weight: 500;
+    background-color: white;
+    /* padding-bottom: 10px; */
+}
+/* .client_box_serach::-webkit-scrollbar{
+    display: none;
+} */
+
+/* ///////////////////////////////////  */
+.client_box_serach_set_width{
+    /* background-color: red; */
+    width: 200%;
+}
+
+.client_search_para,.client_search_table {
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 13px;
     
 }
+
+.client_search_para:hover {
+    background-color: rgb(9, 115, 253);
+    color: white;
+}
+
+.client_search {
+    color: blue;
+    padding: 5px;
+}
+.client_search:hover {
+    background-color: rgb(9, 115, 253);
+    color: white;
+}
+
+.client_hid {
+    display: none;
+}
+.search_div{
+    /* border: 1px solid red; */
+    display: flex;
+}
+
+.table tr td{
+    border: 0px;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* search box start */
+
+.searchbox_main_outer {
+    position: fixed;
+    /* border: 10px solid red; */
+    width: 100vw;
+    height: 100vh;
+    top: 0vh;
+    left: 0vw;
+    /* filter: blur(5px); */
+    background-color: rgba(240, 248, 255, 0.363);
+    /* background-color: red; */
+    z-index: 4;
+    font-size: 14px;
+}
+
+.searchbox_main_outer_hid {
+    display: none;
+}
+
+.searchbox_main {
+    width: 600px;
+    position: relative;
+    /* border: 1px solid black; */
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    max-height: 488px;
+    z-index: 4;
+    background-color: white;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-radius: 8px;
+
+}
+
+.searchbox_cross {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 15px;
+    top: 15px;
+    /* border: 2px solid red; */
+    cursor: pointer;
+}
+
+.searchbox_main h4 {
+    margin-bottom: 20px;
+}
+
+
+.searchbox_input input {
+
+    height: 30px;
+    width: 70%;
+    margin-left: 10px;
+    border-radius: 5px;
+    padding-left: 10px;
+
+}
+
+.Searchbox_btn1,
+.searcbox_lower_btn {
+    margin-top: 10px;
+    display: flex;
+
+    justify-content: end;
+    margin-bottom: 30px;
+}
+
+.Searchbox_btn1 button,
+.searcbox_lower_btn button {
+    margin: 10px;
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.459);
+    transition: all 0.3s ease-in-out;
+}
+
+.Searchbox_btn1 button:hover,
+.searcbox_lower_btn button:hover {
+    transform: translate3D(0,-1px,0) scale(1.1);
+    background-color: #008304;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+.serached_client_list {
+    /* border: 1px solid black; */
+    max-height: 250px;
+    overflow-y: scroll;
+    /* display: none; */
+}
+
+/* .serached_client_list p {
+    box-shadow: 0px -15px 10px -15px #111;
+    padding: 5px;
+    cursor: pointer;
+
+}
+
+.serached_client_list p:hover {
+    background-color: #efefef;
+    cursor: pointer;
+} */
+
+.searcbox_lower_btn {}

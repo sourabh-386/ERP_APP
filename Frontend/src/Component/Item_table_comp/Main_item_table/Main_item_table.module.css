@@ -10,7 +10,7 @@
 .form{
     position: relative;
     /* border: 1px solid red; */
-    height: 35vh;
+    height: 46vh;
     overflow: hidden;
     transition: all 0.4s ease-in-out;
     margin-bottom: 3vh;   
@@ -25,16 +25,17 @@
 
 }
 .table{
-    /* border: 2px solid red; */
-    /* margin-top: 5vh; */
     border-collapse: separate;
-    border-spacing: 0 25px;
+    border-spacing: 20px 30px;
+    /* border: 1px solid red; */
 }
 .table tr td{
     background-color: white;
     border: none;
     /* border: none; */
     /* border: 1px solid black; */
+    /* border: 1px solid red; */
+
 }
 .discription{
   width: 100%;

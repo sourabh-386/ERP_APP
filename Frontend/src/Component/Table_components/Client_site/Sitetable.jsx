@@ -13,24 +13,24 @@ import { useEffect } from 'react'
 import Date_fn from '../../../Helper_fn/Date_fn'
 import Site_data from '../Site_data/Site_data'
 import Site_data_data from '../../../Sub_component/Site_data_data/Site_data_data'
-
+import Client_box from '../../../Sub_component/Admin_page/Client_box'
 const Sitetable = () => {
 
-    const { Cust_save_btn, site_data, set_site_data,disable_form } = useContext(Table_context)
+    const { Cust_save_btn, site_data, set_site_data, disable_form } = useContext(Table_context)
 
     const [Site_arrow, set_Site_arrow] = useState(false)
 
     const site_vis_fn = () => {
 
         if (!disable_form) {
-        if (Cust_save_btn) {
-            Site_arrow ? set_Site_arrow(false) : set_Site_arrow(true)
-        }
-        else {
-            toast.error(<div className='error_box'>Save Customer Details</div>)
+            if (Cust_save_btn) {
+                Site_arrow ? set_Site_arrow(false) : set_Site_arrow(true)
+            }
+            else {
+                toast.error(<div className='error_box'>Save Customer Details</div>)
 
+            }
         }
-    }
     }
 
     //store cuntry city ,state list
@@ -43,9 +43,9 @@ const Sitetable = () => {
 
 
     const valid = Yup.object({
-        Site_Name: Yup.string().min(2).max(40).required().notOneOf(site_data.map(item=>item.Site_Name),'Site Already Exist'),
+        Site_Name: Yup.string().min(2).max(40).required().notOneOf(site_data.map(item => item.Site_Name), 'Site Already Exist'),
         Address1: Yup.string().min(5).max(60).required(),
-        Country: Yup.string().min(2).max(30).required(),
+        // Country: Yup.string().min(2).max(30).required(),
         State: Yup.string().min(2).max(30).required(),
         City: Yup.string().min(2).max(30).required(),
         PIN_Code: Yup.number().typeError('PIN Code must be a number').required('sss'),
@@ -98,7 +98,7 @@ const Sitetable = () => {
 
     });
 
-    
+
     ///open site first  time
     useEffect(() => {
         if (!disable_form) {
@@ -107,8 +107,8 @@ const Sitetable = () => {
     }, [Cust_save_btn])
 
 
-     ///disable form
-     useEffect(() => {
+    ///disable form
+    useEffect(() => {
 
         disable_form ? set_Site_arrow(false) : ''
     }, [disable_form])
@@ -146,7 +146,7 @@ const Sitetable = () => {
     const toggle_country_list = async () => {
 
         try {
-            const response = await fetch("http://localhost:3008/location")
+            const response = await fetch("http://localhost:3008/LOV/location")
 
             const data = await response.json()
 
@@ -169,6 +169,12 @@ const Sitetable = () => {
         setFieldValue('City', data.City)
         document.getElementById('country_list_toggle_id').classList.toggle('hide_country_list')
 
+    }
+
+    ///tringer onchange
+    const onchange_event_fn = (e) => {
+        // set_Cust_save_btn(false)
+        handleChange(e)
     }
 
 
@@ -210,7 +216,7 @@ const Sitetable = () => {
                             })
                         }
                         <tr>
-                            <td>{site_data.length+1}</td>
+                            <td>{site_data.length + 1}</td>
                             <td>
                                 <input
                                     type="text"
@@ -219,7 +225,7 @@ const Sitetable = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Site_Name}
-                                // ref={country_value}
+
                                 />
                             </td>
 
@@ -269,7 +275,18 @@ const Sitetable = () => {
                             </td>
 
                             <td>
-                                {/* <div className={style.input_box}> */}
+
+                                {/* <Client_box
+                                    onchange_event_fn={onchange_event_fn}
+                                    values={values.Country}
+                                    field_name={'Country'}
+                                    setFieldValue={setFieldValue}
+                                    api={`http://localhost:3008/LOV/location`}
+                                    input_lable={'location'}
+                                    box_heading={'Search and Select: location'}
+
+                                /> */}
+                                <div className='lov_box'>
                                 <input
                                     type="text"
                                     name='Country'
@@ -277,7 +294,6 @@ const Sitetable = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.Country}
-                                // ref={country_value}
                                 />
                                 {/* <img src={down_img} alt="img" id='arrow_down_img' onClick={() => { toggle_country_list() }} />
                                     <div className='country_list' id='country_list_toggle_id' >
@@ -303,7 +319,10 @@ const Sitetable = () => {
                                         <hr />
                                         <p className='client_list_search' onClick={() => search_onclick_fn()}><a href="#">Search</a></p>
                                     </div> */}
-                                {/* </div> */}
+                                    {/* <div className='lov_box_searches'>
+                                        vffdfdfsdds
+                                    </div> */}
+                                </div>
                             </td>
 
 
@@ -354,8 +373,8 @@ const Sitetable = () => {
 
                             </td>
                             <td>
-                                <button type='submit'  className='add_btn' onClick={()=>{validation_fn()}}><b>+ADD</b></button>
-                            
+                                <button type='submit' className='add_btn' onClick={() => { validation_fn() }}><b>+ADD</b></button>
+
                             </td>
                             <td></td>
                         </tr>

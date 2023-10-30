@@ -1,14 +1,15 @@
 const path = require('path')
 const mysql = require('mysql2/promise')
 
+const db = mysql.createPool({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "employees"
+})
+
 exports.Emp_table_fn = async (req, res) => {
 
-    const db = mysql.createPool({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "employees"
-    })
 
     const currentTimestamp = new Date().getTime();
     let transactionSuccess = false;
@@ -22,18 +23,14 @@ exports.Emp_table_fn = async (req, res) => {
         // extrating data 
 
         const { Hr_table, Emp_table } = req.body
-
         const { EMP_First_Name, EMP_Last_Name, EMP_Middle_Name, Title, Gender, Grade, Start_date, Active } = Hr_table;
-
         const formattedFirstName = EMP_First_Name.trim().charAt(0).toUpperCase() + EMP_First_Name.trim().slice(1).toLowerCase();
         const formattedLastName = EMP_Last_Name.trim().toLowerCase();
         const formattedMiddleName = EMP_Middle_Name.trim().toLowerCase();
         const formattedTitle = Title.trim().charAt(0).toUpperCase() + Title.trim().slice(1).toLowerCase();
         const formattedGender = Gender
         const formattedGrade = Grade.trim().charAt(0).toUpperCase() + Grade.trim().slice(1).toLowerCase();
-
         const full_name = formattedFirstName + (formattedMiddleName ? ` ${formattedMiddleName}` : '') + (formattedLastName ? ` ${formattedLastName}` : '')
-
         const sql1 = `INSERT INTO HR_MASTER 
         (EMP_First_Name, EMP_Last_Name, EMP_Middle_Name, Title, Gender, Grade,Start_date,Active,EMP_id,Full_name) 
         VALUES (?,?,?,?,?,?,?,?,?,?)`;
@@ -74,7 +71,7 @@ exports.Emp_table_fn = async (req, res) => {
             res.status(200).send('Data inserted successfully.');
         } else {
             await conn.rollback();
-            res.status(500).send('Employee Alredy exist.');
+            res.status(500).send('Employee Alredy exist');
         }
 
     } catch (error) {

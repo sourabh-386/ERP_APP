@@ -107,8 +107,18 @@ const Admin_main = () => {
                                 value={values.Client}
                             />
                         </td> */}
+                        <td colSpan='2'>
+                            <Client_box
+                                onchange_event_fn={onchange_event_fn}
+                                values={values.Client}
+                                field_name={'Client'}
+                                setFieldValue={setFieldValue}
+                                api={`http://localhost:3008/LOV/client`}
+                                input_lable={'Client Name'}
+                                box_heading={'Search and Select: Client Name'}
 
-                        <Client_box onchange_event_fn={onchange_event_fn} values={values} />
+                            />
+                        </td>
                         <td >
                             <label className={style.lable}><b>** Job title : </b></label>
 
@@ -165,6 +175,7 @@ const Admin_main = () => {
                                 className={style.client_input_fields}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 value={values.Role}
+
 
                             />
                         </td>
@@ -223,9 +234,6 @@ const Admin_main = () => {
                         </td>
                     </tr>
                     <Salary_box onchange_event_fn={onchange_event_fn} />
-
-
-
                     <tr>
                         <td colSpan='7'>
                             <button type='submit' >Submit</button>

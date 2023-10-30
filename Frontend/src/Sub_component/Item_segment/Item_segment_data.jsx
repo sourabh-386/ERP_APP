@@ -7,6 +7,7 @@ import { findDuplicates_seg } from '../../Helper_fn/Submit_Item_table_data'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const Item_segment_data = ({ data, index }) => {
 
     const { segment, Item_save_btn, set_segment, setState, sub_segment, demostate, set_sub_segment } = useContext(Item_Table_context)

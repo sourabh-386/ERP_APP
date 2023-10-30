@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Table_context } from '../../../Context/Table_context/Table_context'
 // import Sitetable from '../../Sub_component/Client_site/Sitetable'
 import Date_fn from '../../../Helper_fn/Date_fn'
+import Client_box from '../../../Sub_component/Admin_page/Client_box'
 
 const Table = () => {
 
@@ -50,7 +51,7 @@ const Table = () => {
         Start_date: Date_fn(),
         Organisation: '',
         NDA_Signed: false,
-        files: []
+        files: ''
     }
 
 
@@ -147,11 +148,11 @@ const Table = () => {
                 <b>Customers</b>
                 <div className='heading_underline'></div>
             </div>
-            <form className={Cust_arrow ? style.form : style.form_vis} onSubmit={handleSubmit}>
-                <table className={style.table}>
+            <form className={Cust_arrow ? style.form : style.form_vis} onSubmit={handleSubmit} >
+                <table className={style.table} width="100%">
                     <tr>
-                        <td><label htmlFor="">** Customer Name :</label></td>
                         <td>
+                        <label htmlFor=""><b>** Customer Name :</b></label>
                             <input
                                 type="text"
                                 name='Customer_Name'
@@ -162,11 +163,9 @@ const Table = () => {
                                 disabled={disable_form}
                             />
                         </td>
-                        <td>
-                            <label htmlFor="">** Organisation Type : </label>
-                        </td>
-                        <td>
-                            <div className='List_of_values'>
+                        
+                        <td width="33%">
+                            {/* <div className='List_of_values'>
                                 <input
                                     type="text"
                                     name='Organisation'
@@ -201,10 +200,22 @@ const Table = () => {
                                     <hr />
                                     <p className='client_list_search'><a href="#">Search</a></p>
                                 </div>
-                            </div>
+                            </div> */}
+                            {/* <label htmlFor="">** Organisation Type : </label> */}
+                            <Client_box
+                                onchange_event_fn={onchange_event_fn}
+                                values={values.Organisation}
+                                field_name={'Organisation'}
+                                setFieldValue={setFieldValue}
+                                api={`http://localhost:3008/LOV/organisation`}
+                                input_lable={'Organisation'}
+                                box_heading={'Search and Select: Organisation'}
+
+                            />
                         </td>
-                        <td><label htmlFor="">** Tax Registration : </label></td>
-                        <td><input
+                        <td>
+                        <label htmlFor=""><b>** Tax Registration : </b></label>                            
+                            <input
                             type="text"
                             name="Tax_Registration"
                             value={values.Tax_Registration}
@@ -215,11 +226,12 @@ const Table = () => {
                         /></td>
                     </tr>
                     <tr>
-                        <td><label>** Start Date : </label></td>
-                        <td><input
+                        <td>
+                        <label><b>** Start Date : </b></label>                            
+                            <input
                             type="date"
                             name="Start_date"
-                            className='startdate_input'
+                            className='client_input_fields'
                             value={values.Start_date}
                             onChange={(e) => { onchange_event_fn(e) }}
                             onBlur={handleBlur}
@@ -227,7 +239,7 @@ const Table = () => {
                         /></td>
                         <td>
                             <div className='checkbox_input'>
-                                <label>NDA Signed : </label><input
+                                <label><b>NDA Signed : </b></label><input
                                     type="checkbox"
                                     name='NDA_Signed'
                                     className='nda_signed_input'
@@ -235,16 +247,15 @@ const Table = () => {
                                     onChange={(e) => { onchange_event_fn(e) }}
                                     onBlur={handleBlur}
                                     disabled={disable_form}
-
-
                                 />
                             </div></td>
                         <td>
                             <input
+                            className='checkbox_input'
                                 type="file"
                                 name="files"
-                                onChange={(e) => {onchange_event_fn(e) }}
-                                multiple
+                                onChange={(e) => { setFieldValue('files',e.currentTarget.files[0]) }}
+                                // multiple
                             />
                         </td>
                     </tr>

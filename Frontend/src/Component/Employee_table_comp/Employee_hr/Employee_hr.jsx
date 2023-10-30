@@ -8,9 +8,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Emp_Table_context } from '../../../Context/Employee_table_context/Employee_table_context'
 import { useContext } from 'react'
 import Date_fn from '../../../Helper_fn/Date_fn'
+import Client_box from '../../../Sub_component/Admin_page/Client_box'
 const Employee_hr = () => {
 
-    const { Emp_save_btn, set_Emp_save_btn, emp_hr_table_data, set_emp_hr_table_data, emp, set_emp,disable_form } = useContext(Emp_Table_context)
+    const { Emp_save_btn, set_Emp_save_btn, emp_hr_table_data, set_emp_hr_table_data, emp, set_emp, disable_form } = useContext(Emp_Table_context)
     //change item_form_vis //setup arrow img
     const [item_arrow, set_item_arrow] = useState(true)
 
@@ -55,12 +56,12 @@ const Employee_hr = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
-            if(!disable_form){
-            set_emp_hr_table_data(value)
-            set_Emp_save_btn(true)
-            // console.log(emp_hr_table_data)
-            set_emp(true)
-            // resetForm()
+            if (!disable_form) {
+                set_emp_hr_table_data(value)
+                set_Emp_save_btn(true)
+                // console.log(emp_hr_table_data)
+                set_emp(true)
+                // resetForm()
             }
 
         },
@@ -115,8 +116,9 @@ const Employee_hr = () => {
             <form className={item_arrow ? style.form : style.form_vis} onSubmit={handleSubmit}>
                 <table className={style.table}>
                     <tr >
-                        <td><label htmlFor="">** First Name :</label></td>
                         <td>
+                            <label htmlFor=""><b>** First Name :</b></label>
+
                             <input
                                 type="text"
                                 name='EMP_First_Name'
@@ -130,8 +132,10 @@ const Employee_hr = () => {
                             />
                         </td>
 
-                        <td><label htmlFor="">Middle Name :</label></td>
+                        {/* <td><label htmlFor="">Middle Name :</label></td> */}
                         <td>
+                            <label htmlFor=""><b>Middle Name :</b></label>
+
                             <input
                                 type="text"
                                 name='EMP_Middle_Name'
@@ -143,8 +147,10 @@ const Employee_hr = () => {
                             />
                         </td>
 
-                        <td><label htmlFor="">Last Name :</label></td>
+                        {/* <td><label htmlFor="">Last Name :</label></td> */}
                         <td>
+                            <label htmlFor=""><b>** Last Name :</b></label>
+
                             <input
                                 type="text"
                                 name='EMP_Last_Name'
@@ -158,8 +164,8 @@ const Employee_hr = () => {
                     </tr>
 
                     <tr >
-                        <td><label htmlFor="">** Title :</label></td>
-                        <td>
+                        {/* <td><label htmlFor="">** Title :</label></td> */}
+                        {/* <td>
                             <input
                                 type="text"
                                 name='Title'
@@ -169,10 +175,23 @@ const Employee_hr = () => {
                                 onBlur={handleBlur}
                                 disabled={disable_form}
                             />
+                        </td> */}
+                        <td>
+                        <Client_box
+                            onchange_event_fn={onchange_event_fn}
+                            values={values.Title}
+                            field_name={'Title'}
+                            setFieldValue={setFieldValue}
+                            api={`http://localhost:3008/LOV/empTitle`}
+                            input_lable={'Title'}
+                            box_heading={'Search and Select: Emp Details'}
+
+                        />
                         </td>
 
-                        <td><label htmlFor="">** Gender :</label></td>
                         <td>
+                            <label htmlFor=""><b>** Gender :</b></label>
+
                             <select
                                 className='client_input_fields'
                                 value={values.Gender}
@@ -180,16 +199,17 @@ const Employee_hr = () => {
                                 onBlur={handleBlur}
                                 disabled={disable_form}
                                 name="Gender" >
-                                    <option value="" defaultValue='' key='default'>Select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                <option value="" defaultValue='' key='default'>Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
 
                             </select>
-                            
+
                         </td>
 
-                        <td><label htmlFor="">** Grade :</label></td>
                         <td>
+                            <label htmlFor=""><b>** Grade :</b></label>
+
                             <input
                                 type="text"
                                 name='Grade'
@@ -203,19 +223,23 @@ const Employee_hr = () => {
 
                     </tr>
                     <tr>
-                        <td><label>** Start Date : </label></td>
-                        <td><input
-                            type="date"
-                            name="Start_date"
-                            className='client_input_fields'
-                            // value={date.toLocaleDateString('en-CA')}
-                            value={values.Start_date}
-                            onChange={(e) => { onchange_event_fn(e) }}
-                            onBlur={handleBlur}
-                            disabled={disable_form}
-                        /></td>
-                        <td><label htmlFor="">** Active :</label></td>
                         <td>
+                            <label htmlFor=""><b>** Start Date :</b></label>
+
+                            <input
+                                type="date"
+                                name="Start_date"
+                                className='client_input_fields'
+                                // value={date.toLocaleDateString('en-CA')}
+                                value={values.Start_date}
+                                onChange={(e) => { onchange_event_fn(e) }}
+                                onBlur={handleBlur}
+                                disabled={disable_form}
+                            /></td>
+                        
+                        <td>
+                        <label htmlFor=""><b>** Active :</b></label>
+
                             <select
                                 name="Active"
                                 value={values.Active}

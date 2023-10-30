@@ -1,64 +1,70 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+// import { useDispatch } from 'react-redux'
+import { toggle_loading_screen } from '../Reducer/Reducers/Parent_reducer';
+
 //Submit data to backend
-const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, sub_segment, set_disable_form,disable_form) => {
-if(!disable_form){
-    if (Item_save_btn) {
+const Submit_item_details_fn = (Item_save_btn, item_main_table_data, segment, sub_segment, set_disable_form, disable_form,dispatch) => {
 
-        if (segment.length !== 0) {
 
-            const return_value = findDuplicates_seg(segment)
+    dispatch(toggle_loading_screen())
 
-            if (return_value.length === 0) {
 
-                if (sub_segment.length !== 0) {
+    if (!disable_form) {
+        if (Item_save_btn) {
 
-                    const return_value = findDuplicates_sub_seg(sub_segment)
+            if (segment.length !== 0) {
 
-                    if (return_value.length === 0) {
+                const return_value = findDuplicates_seg(segment)
 
-                        /////////////////////////////
-                        send_item_data(item_main_table_data, segment, sub_segment,set_disable_form)
-                        ////////////////////////////
-                        // console.log(item_main_table_data, segment, sub_segment,se)
-                        // set_disable_form(true)
+                if (return_value.length === 0) {
+
+                    if (sub_segment.length !== 0) {
+
+                        const return_value = findDuplicates_sub_seg(sub_segment)
+
+                        if (return_value.length === 0) {
+
+                            /////////////////////////////
+                            send_item_data(item_main_table_data, segment, sub_segment, set_disable_form,dispatch)
+                            ////////////////////////////
+
+                        }
+                        else {
+                            toast.error(<div className='error_box'>Dublicate Sub Segment </div>)
+
+                        }
 
                     }
                     else {
-                        toast.error(<div className='error_box'>Dublicate Sub Segment </div>)
 
+
+                        send_item_data(item_main_table_data, segment, sub_segment, set_disable_form,dispatch)
+
+                        /////////////////////////////
                     }
 
                 }
                 else {
-                    // console.log('no sub_segment')
-                    send_item_data(item_main_table_data, segment, sub_segment,set_disable_form)
-                    // set_disable_form(true)
+                    toast.error(<div className='error_box'>Dublicate Tech Segment </div>)
 
-                    /////////////////////////////
                 }
 
             }
             else {
-                toast.error(<div className='error_box'>Dublicate Tech Segment </div>)
-
+                toast.error(<div className='error_box'>Enter Atleast One Tech Segment</div>)
             }
 
         }
         else {
-            toast.error(<div className='error_box'>Enter Atleast One Tech Segment</div>)
+            toast.error(<div className='error_box'>Save Tech Details</div>)
         }
 
     }
     else {
-        toast.error(<div className='error_box'>Save Tech Details</div>)
+        toast.error(<div className='error_box'>Tech Details alredy saved</div>)
     }
-
-}
-else{
-    toast.error(<div className='error_box'>Tech Details alredy saved</div>)
-}
 }
 
 
@@ -105,7 +111,9 @@ function findDuplicates_sub_seg(arr) {
 
 //sending data fn
 
-const send_item_data = async (item_main_table_data, segment, sub_segment,set_disable_form) => {
+const send_item_data = async (item_main_table_data, segment, sub_segment, set_disable_form,dispatch) => {
+
+
 
     try {
         const res = await axios({
@@ -119,9 +127,15 @@ const send_item_data = async (item_main_table_data, segment, sub_segment,set_dis
         });
 
         toast.success(<div className='error_box'>Item Data Saved</div>)
+
+        dispatch(toggle_loading_screen())
+
+
         set_disable_form(true)
 
     } catch (error) {
+
+        dispatch(toggle_loading_screen())
 
         console.log('catch', error)
 

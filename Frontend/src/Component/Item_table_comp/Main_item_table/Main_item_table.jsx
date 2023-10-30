@@ -10,7 +10,7 @@ import { Item_Table_context } from '../../../Context/Item_table_context/Item_tab
 import Date_fn from '../../../Helper_fn/Date_fn';
 const Main_item_table = () => {
 
-    const { Item_save_btn, set_Item_save_btn,set_item_main_table_data,disable_form} = useContext(Item_Table_context)
+    const { Item_save_btn, set_Item_save_btn, set_item_main_table_data, disable_form } = useContext(Item_Table_context)
 
     //change item_form_vis //setup arrow img
     const [item_arrow, set_item_arrow] = useState(true)
@@ -48,11 +48,11 @@ const Main_item_table = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
-            if(!disable_form){
+            if (!disable_form) {
 
-            set_item_main_table_data(value)
-            set_Item_save_btn(true)
-            // Set_segment_vis(true)
+                set_item_main_table_data(value)
+                set_Item_save_btn(true)
+                // Set_segment_vis(true)
             }
         },
     })
@@ -94,8 +94,8 @@ const Main_item_table = () => {
             <form className={item_arrow ? style.form : style.form_vis} onSubmit={handleSubmit}>
                 <table className={style.table}>
                     <tr >
-                        <td><label htmlFor="">** Tech Name :</label></td>
                         <td>
+                            <label htmlFor=""><b>** Tech Name :</b></label>
                             <input
                                 type="text"
                                 name='Tech_Name'
@@ -106,8 +106,8 @@ const Main_item_table = () => {
                                 disabled={disable_form}
                             />
                         </td>
-                        <td><label htmlFor="">** Rating :</label></td>
                         <td>
+                            <label htmlFor=""><b>** Rating :</b></label>
                             <select
                                 name="Rating"
                                 value={values.Rating}
@@ -135,12 +135,12 @@ const Main_item_table = () => {
                                 disabled={disable_form}
                             /> */}
                         </td>
-                        <td><label htmlFor="">** Start Date :</label></td>
                         <td>
+                            <label htmlFor=""><b>** Start Date :</b></label>
                             <input
                                 type="date"
                                 name='Start_date'
-                                className='startdate_input'
+                                className='client_input_fields'
                                 value={values.Start_date}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}
@@ -149,12 +149,12 @@ const Main_item_table = () => {
                         </td>
                     </tr>
                     <tr>
-                        <td><label htmlFor="">** Description :</label></td>
                         <td colSpan='5' >
+                            <label htmlFor=""><b>** Description :</b></label>
                             <input
                                 type="text"
                                 name='Description'
-                                className={style.discription}
+                                className='client_input_fields'
                                 value={values.Description}
                                 onChange={(e) => { onchange_event_fn(e) }}
                                 onBlur={handleBlur}

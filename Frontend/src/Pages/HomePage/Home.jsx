@@ -1,10 +1,18 @@
 import React from 'react'
 import './Home.css'
 import { motion } from 'framer-motion'
-// import Customer_contact from '../../Component/Table_components/Customer_contact/Customer_contact'
-// import Random from '../../Sub_component/random'
 import Option_box from '../../Sub_component/Reused_comp/Option_box/Option_box'
+import Loader from '../../Sub_component/Reused_comp/Loder/Loader'
+import { useDispatch } from 'react-redux'
+// import { toggle_loading_screen } from '../../Reducer/Reducers/Parent_reducer'
+// import { useSelector } from 'react-redux';
+// import 
 const Home = () => {
+
+  // const dispatch=useDispatch()
+  // const loadingScreen = useSelector((state) => state.Loading_screen);
+
+  // console.log(loadingScreen)
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -17,8 +25,9 @@ const Home = () => {
         homepage
         {/* <Random /> */}
         {/* <Random /> */}
-        <Option_box />
-  
+        {/* <Option_box /> */}
+        {/* <Loader/> */}
+        {/* <button onClick={()=>{dispatch(toggle_loading_screen())}}>ddd</button> */}
 
       </div>
 

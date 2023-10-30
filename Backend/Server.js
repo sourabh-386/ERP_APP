@@ -3,48 +3,47 @@ const mysql = require('mysql2/promise')
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-const {Tableroute}=require('./Routs/TableRouts/Main_Tables_routs')
+const { Tableroute } = require('./Routs/TableRouts/Main_Tables_routs')
+const { LovRouts } = require('./Routs/LOV_Routs/Lov_routs')
+
+const multer = require('multer')
+
+//creating storage
+exports.storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, './File')
+  },
+  filename: function (req, file, cb) {
+    return cb(null, `${Date.now()}_${file.originalname}`)
+  }
+})
+
 
 
 const app = express()
 
+const db = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "first"
+})
+
+
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/data', Tableroute) 
-
-
-//for checking
-app.get('/', (req, res) => {
-  res.send('sdsdsdsds')
-})
-
-
-//for geo location
-app.get('/location', (req, res) => {
-  const sql = "SELECT * FROM geo_lookup"
-  db.query(sql, (err, data) => {
-    if (err) {
-      return res.json(err);
-    } else {
-      return res.json(data);
-    }
-  })
-})
 
 
 
-//for getting organisation type address
-app.get('/Orgtype', (req, res) => {
-  const sql = "SELECT Name FROM organisation_type "
-  db.query(sql, (err, data) => {
-    if (err) {
-      return res.json(err);
-    } else {
-      return res.json(data);
-    }
-  })
-})
+// app.post()
+
+// app.use('/data', Tableroute)
+app.use('/LOV', LovRouts)
+
+
+
+
 
 
 app.listen(3008, () => {

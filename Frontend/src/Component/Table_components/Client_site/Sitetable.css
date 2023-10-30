@@ -96,14 +96,31 @@ table {
   }
   
   td, th {
-    font-size: 11.5px;
+    font-size: 13px;
     border: 1px solid #dddddd;
     text-align: left;
     padding: 3px;
     cursor: pointer;
+    color: rgb(80, 79, 79);
   }
  
   
   tr:nth-child(even) {
     background-color: #efefef;
+  }
+
+
+  /* //////////////////////  */
+/* making site lovs  */
+
+  .lov_box{
+    border: 1px solid black;
+    /* height: 100px; */
+    position: relative;
+  }
+  .lov_box_searches{
+    border: 1px solid red;
+    position: absolute;
+    /* top: 13vh;
+    right: 28vw; */
   }

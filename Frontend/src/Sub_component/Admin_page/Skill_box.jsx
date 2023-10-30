@@ -8,9 +8,9 @@ import style from '../../Component/Admin_page_comp/Admin_main/Admin_main.module.
 import { useRef } from 'react';
 // import { useState } from 'react';
 
-const Skill_box = ({skill_box_data}) => {
+const Skill_box = ({ skill_box_data }) => {
 
-    
+
 
     //save skills values
     const [value, set_value] = useState([])
@@ -26,8 +26,9 @@ const Skill_box = ({skill_box_data}) => {
 
         const dublicate_skill = value.find((val => { return (val === skill_val) }))
 
+        if(skill_val.length!==0 && skill_val==""){
         if (dublicate_skill == undefined) {
-            set_value(prevValue => [...prevValue,skill_val])
+            set_value(prevValue => [...prevValue, skill_val])
             skill_box_data(value)
             console.log(value)
             skillref.current.value = ''
@@ -36,6 +37,7 @@ const Skill_box = ({skill_box_data}) => {
         else {
             toast.error(<div className="error_box">{skill_val} is already added</div>)
         }
+    }
 
     }
 
@@ -79,6 +81,11 @@ const Skill_box = ({skill_box_data}) => {
                             pauseOnHover
                         />
                     </div>
+
+                </div>
+
+                <div className={style.search_results}>
+                    cscxc
                 </div>
 
             </td>
