@@ -71,23 +71,20 @@ const send_cust_data = async (Cust_main_table_data, site_data, site_contact,set_
 
 
     try {
-        const formData = new FormData();
-
-        formData.append('file', Cust_main_table_data.file);
         await axios({
             method: 'post',
             url: 'http://localhost:3008/data/customer_data',
             data: {
-                Cust_main_table_data: Cust_main_table_data,
-                site_data: site_data,
-                site_contact: site_contact,
-                formData:formData
+                Cust_main_table_data
+                // : Cust_main_table_data
+                // site_data: site_data,
+                // site_contact: site_contact
             }
         });
 
 
         toast.success(<div className='error_box'>Customer Data Saved</div>)
-        set_disable_form(true)
+        // set_disable_form(true)
 
     } catch (error) {
 

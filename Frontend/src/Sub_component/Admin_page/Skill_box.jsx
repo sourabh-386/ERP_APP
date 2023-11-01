@@ -26,7 +26,7 @@ const Skill_box = ({ skill_box_data }) => {
 
         const dublicate_skill = value.find((val => { return (val === skill_val) }))
 
-        if(skill_val.length!==0 && skill_val==""){
+        if(skill_val.length!==0 && skill_val!==" " && skill_val!=="  " && skill_val!=="   "){
         if (dublicate_skill == undefined) {
             set_value(prevValue => [...prevValue, skill_val])
             skill_box_data(value)

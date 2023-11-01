@@ -3,7 +3,7 @@ const LovRouts=express.Router()
 const {Client_data,Client_selected_data}=require('../../Controllers/LOV_Controller/Client_data_lov')
 const {Org_data,Org_selected_data}=require('../../Controllers/LOV_Controller/Org_data_lov')
 const {location,location_selected_data}=require('../../Controllers/LOV_Controller/Location_data_lov')
-const {Emp_title,Emp_selected_title}=require('../../Controllers/LOV_Controller/Emp_title_lov')
+const {Emp_title,Emp_selected_title }=require('../../Controllers/LOV_Controller/Emp_title_lov')
 LovRouts
 .get('/client',Client_data)
 .get('/client/:id',Client_selected_data)

@@ -11,6 +11,10 @@ const db = mysql.createPool({
 exports.Emp_table_fn = async (req, res) => {
 
 
+
+    
+
+
     const currentTimestamp = new Date().getTime();
     let transactionSuccess = false;
     let conn;

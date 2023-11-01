@@ -1,7 +1,5 @@
 const path = require('path')
 const mysql = require('mysql2/promise')
-// const path=require('path')
-const multer = require('multer')
 
 const { send_mail_fn } = require('./Helper_functions/Customre_mail_send_fn.js')
 
@@ -14,10 +12,27 @@ exports.Customer_table_fn = async (req, res) => {
         database: "first"
     })
 
+    const destinationPath = path.join(__dirname, '../../', 'Files')
 
-    console.log(req.body)
-    console.log(req.file)
-    res.send('dddd')
+
+    try {
+        const files = req.file;
+        console.log(files)
+
+        const fileUrls = files.map(file => {
+            return req.protocol + '://' + req.get('host') + destinationPath + file.filename;
+        });
+
+        console.log(fileUrls)
+        res.send('dddd')
+
+    } catch (error) {
+        console.group(error)
+        res.send(error)
+    }
+
+
+
 
     // const currentTimestamp = new Date().getTime();
     // let transactionSuccess = false;

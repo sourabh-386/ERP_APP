@@ -8,8 +8,6 @@ import {SearchSlice} from '../Reducers/Search_reducer'
 export const Store = configureStore({
     reducer:{
       reducer1:LoaderSlice.reducer,
-      reducer2:SearchSlice.reducer
-       
+      reducer2:SearchSlice.reducer     
     } 
-
 })

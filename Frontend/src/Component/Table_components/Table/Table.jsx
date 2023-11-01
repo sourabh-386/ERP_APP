@@ -51,7 +51,7 @@ const Table = () => {
         Start_date: Date_fn(),
         Organisation: '',
         NDA_Signed: false,
-        files: ''
+        file: ''
     }
 
 
@@ -60,22 +60,52 @@ const Table = () => {
         validationSchema: valid,
         onSubmit: async (value, { resetForm }) => {
 
-            if (!disable_form) {
+            // if (!disable_form) {
 
-                if (value.NDA_Signed) {
-                    value.NDA_Signed = "Yes"
+            //     if (value.NDA_Signed) {
+            //         value.NDA_Signed = "Yes"
+            //     }
+            //     else {
+            //         value.NDA_Signed = "No"
+            //     }
+
+            //     const formData = new FormData();
+
+            //     for (let key in values) {
+            //         if (key === 'file') {
+            //             const files = values[key];
+
+            //             for (let i = 0; i < files.length; i++) {
+            //                 formData.append('file', files[i]);
+            //             }
+            //         } else {
+            //             formData.append(key, values[key]);
+            //         }
+            //     }
+
+            //     set_Cust_main_table_data(formData)
+
+            //     set_Cust_save_btn(true)
+            // }
+
+            console.log(value)
+            set_Cust_save_btn(true)
+
+            const formData = new FormData();
+
+            for (let key in values) {
+                if (key === 'file') {
+                    const files = values[key];
+
+                    for (let i = 0; i < files.length; i++) {
+                        formData.append('file', files[i]);
+                    }
+                } else {
+                    formData.append(key, values[key]);
                 }
-                else {
-                    value.NDA_Signed = "No"
-                }
-
-
-                console.log(value)
-
-                set_Cust_main_table_data(value)
-
-                set_Cust_save_btn(true)
             }
+
+            axios.post('http://localhost:3008/data/customer_data', formData)
 
 
         },
@@ -132,6 +162,9 @@ const Table = () => {
         else if (errors.Organisation) {
             toast.error(errors.Organisation)
         }
+        else if (errors.file) {
+            toast.error(errors.file)
+        }
     }
 
 
@@ -148,11 +181,15 @@ const Table = () => {
                 <b>Customers</b>
                 <div className='heading_underline'></div>
             </div>
-            <form className={Cust_arrow ? style.form : style.form_vis} onSubmit={handleSubmit} >
+            <form
+                className={Cust_arrow ? style.form : style.form_vis}
+                onSubmit={handleSubmit}
+                encType="multipart/form-data"
+            >
                 <table className={style.table} width="100%">
                     <tr>
                         <td>
-                        <label htmlFor=""><b>** Customer Name :</b></label>
+                            <label htmlFor=""><b>** Customer Name :</b></label>
                             <input
                                 type="text"
                                 name='Customer_Name'
@@ -163,7 +200,7 @@ const Table = () => {
                                 disabled={disable_form}
                             />
                         </td>
-                        
+
                         <td width="33%">
                             {/* <div className='List_of_values'>
                                 <input
@@ -214,29 +251,29 @@ const Table = () => {
                             />
                         </td>
                         <td>
-                        <label htmlFor=""><b>** Tax Registration : </b></label>                            
+                            <label htmlFor=""><b>** Tax Registration : </b></label>
                             <input
-                            type="text"
-                            name="Tax_Registration"
-                            value={values.Tax_Registration}
-                            className='client_input_fields'
-                            onChange={(e) => { onchange_event_fn(e) }}
-                            onBlur={handleBlur}
-                            disabled={disable_form}
-                        /></td>
+                                type="text"
+                                name="Tax_Registration"
+                                value={values.Tax_Registration}
+                                className='client_input_fields'
+                                onChange={(e) => { onchange_event_fn(e) }}
+                                onBlur={handleBlur}
+                                disabled={disable_form}
+                            /></td>
                     </tr>
                     <tr>
                         <td>
-                        <label><b>** Start Date : </b></label>                            
+                            <label><b>** Start Date : </b></label>
                             <input
-                            type="date"
-                            name="Start_date"
-                            className='client_input_fields'
-                            value={values.Start_date}
-                            onChange={(e) => { onchange_event_fn(e) }}
-                            onBlur={handleBlur}
-                            disabled={disable_form}
-                        /></td>
+                                type="date"
+                                name="Start_date"
+                                className='client_input_fields'
+                                value={values.Start_date}
+                                onChange={(e) => { onchange_event_fn(e) }}
+                                onBlur={handleBlur}
+                                disabled={disable_form}
+                            /></td>
                         <td>
                             <div className='checkbox_input'>
                                 <label><b>NDA Signed : </b></label><input
@@ -251,11 +288,12 @@ const Table = () => {
                             </div></td>
                         <td>
                             <input
-                            className='checkbox_input'
+                                className='checkbox_input'
                                 type="file"
-                                name="files"
-                                onChange={(e) => { setFieldValue('files',e.currentTarget.files[0]) }}
-                                // multiple
+                                name="file"
+                                accept='image/*'
+                                onChange={(e) => { setFieldValue('file', e.currentTarget.files) }}
+                                multiple
                             />
                         </td>
                     </tr>
